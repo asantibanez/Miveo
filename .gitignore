@@ -25,6 +25,9 @@ proguard/
 # Log Files
 *.log
 
-.idea
+# Other Files
 .idea
 gradlew.bat
+
+Miveo.iml
+Vimofit/Vimofit.iml
