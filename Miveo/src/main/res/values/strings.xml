@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Miveo</string>
+    <string name="title_activity_channel_view">ChannelViewActivity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_home">Home</string>
+
+    <!-- App Sections -->
+    <string name="title_section1">Staff Picks</string>
+    <string name="title_section2">Canales Destacados</string>
+    <string name="title_section3">Favoritos</string>
+    <string name="title_section4">Ver Luego</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_example">Example action</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Nav Drawer Options -->
+    <string-array name="nav_drawer_options">
+        <item>Staff Picks</item>
+        <item>Canales Destacados</item>
+        <item>Favoritos</item>
+        <item>Ver Luego</item>
+        <item>Enviar comentarios</item>
+        <item>Ajustes</item>
+    </string-array>
+
+    <!-- Channel View strings -->
+    <string name="tab_title_main">Principal</string>
+    <string name="tab_title_videos">Videos</string>
+    <string name="title_activity_video_playback">Ver Video</string>
+    <string name="title_activity_video_view">VideoViewActivity</string>
+
+</resources>

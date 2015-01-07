@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.vorticelabs.miveo" >
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+
+        <!-- Home Activity -->
+        <activity
+            android:name=".activities.HomeActivity"
+            android:label="@string/title_activity_home" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Channel View -->
+        <activity
+            android:name=".activities.ChannelViewActivity"
+            android:label="@string/title_activity_channel_view" />
+
+        <!-- Channels List -->
+        <activity
+            android:name=".activities.ChannelsListActivity"
+            android:label="@string/title_activity_home" >
+        </activity>
+
+        <!-- Video View -->
+        <activity
+            android:name=".activities.VideoViewActivity"
+            android:label="@string/title_activity_video_view" >
+        </activity>
+
+        <!-- Video Playback -->
+        <activity
+            android:name=".activities.VideoPlaybackActivity"
+            android:label="@string/title_activity_video_playback"
+            android:screenOrientation="landscape">
+        </activity>
+
+    </application>
+
+</manifest>

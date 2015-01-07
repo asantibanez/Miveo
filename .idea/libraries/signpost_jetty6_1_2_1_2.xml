@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="signpost-jetty6-1.2.1.2">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/oauth.signpost/signpost-jetty6/1.2.1.2/50d833636e78a21ac10bfad6fe62b8dac84f4366/signpost-jetty6-1.2.1.2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/oauth.signpost/signpost-jetty6/1.2.1.2/4db927c57d252fdb7cebbaae43f05a54d3e49631/signpost-jetty6-1.2.1.2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
