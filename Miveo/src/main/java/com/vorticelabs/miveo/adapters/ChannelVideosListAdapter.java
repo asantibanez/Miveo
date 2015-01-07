@@ -40,54 +40,31 @@ public class ChannelVideosListAdapter extends RecyclerView.Adapter<ChannelVideos
             return 0;
     }
 
-    public Video getItem(int i) {
-        if(mVideos != null && mVideos.size() > 0)
-            return mVideos.get(i);
-
-        return null;
-    }
-
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View convertView = mInflater.inflate(R.layout.fragment_channel_videos_list, viewGroup, false);
-        return ViewHolder.newInstance(convertView);
+        return new ViewHolder(convertView);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
-        Video video = getItem(i);
+        Video video = mVideos.get(i);
         Picasso.with(mInflater.getContext()).load(video.thumbnailUrl).into(viewHolder.thumbnail);
         viewHolder.title.setText(video.title);
         viewHolder.subTitle.setText("por " + video.uploadedBy);
     }
 
-    public long getItemId(int i) {
-        if(mVideos != null && mVideos.size() > 0)
-            return mVideos.get(i).id;
-
-        return 0;
-    }
-
     public static final class ViewHolder extends RecyclerView.ViewHolder {
-        public final View convertView;
-        private final ImageView thumbnail;
-        private final TextView subTitle;
-        private final TextView title;
 
-        public static ViewHolder newInstance(View convertView) {
+        public ImageView thumbnail;
+        public TextView subTitle;
+        public TextView title;
 
-            ImageView thumbnail = (ImageView) convertView.findViewById(R.id.thumbnail);
-            TextView title = (TextView) convertView.findViewById(R.id.title);
-            TextView subTitle = (TextView) convertView.findViewById(R.id.sub_title);
-            return new ViewHolder(convertView, thumbnail, title, subTitle);
-        }
-
-        private ViewHolder(View convertView, ImageView thumbnail, TextView title, TextView subTitle) {
+        public ViewHolder (View convertView) {
             super(convertView);
-            this.convertView = convertView;
-            this.thumbnail = thumbnail;
-            this.title = title;
-            this.subTitle = subTitle;
+            thumbnail = (ImageView) convertView.findViewById(R.id.thumbnail);
+            title = (TextView) convertView.findViewById(R.id.title);
+            subTitle = (TextView) convertView.findViewById(R.id.sub_title);
         }
     }
 }
