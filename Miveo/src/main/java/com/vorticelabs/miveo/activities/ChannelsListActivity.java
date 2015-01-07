@@ -3,13 +3,10 @@ package com.vorticelabs.miveo.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.vorticelabs.miveo.R;
-import com.vorticelabs.miveo.adapters.ChannelVideosListAdapter;
 import com.vorticelabs.miveo.fragments.ChannelsListFragment;
 
 public class ChannelsListActivity extends FragmentActivity
@@ -18,14 +15,11 @@ public class ChannelsListActivity extends FragmentActivity
     //Fragments
     private ChannelsListFragment mChannelsListFragment;
 
-
-
     //Lifecycle methods
     //onCreate
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-
+        setContentView(R.layout.activity_channels_list);
 
         if(savedInstanceState == null) {
             mChannelsListFragment = new ChannelsListFragment();
