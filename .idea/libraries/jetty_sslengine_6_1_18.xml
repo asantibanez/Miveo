@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="jetty-sslengine-6.1.18">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.mortbay.jetty/jetty-sslengine/6.1.18/92a21df85fb0deb9d9ed152240133bb0301daa7/jetty-sslengine-6.1.18.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.mortbay.jetty/jetty-sslengine/6.1.18/531f49a2e12cdfe5adf4d54f56c33d3c91eddaa4/jetty-sslengine-6.1.18-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
