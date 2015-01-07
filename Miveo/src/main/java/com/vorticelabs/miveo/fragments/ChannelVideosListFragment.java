@@ -61,6 +61,7 @@ public class ChannelVideosListFragment extends Fragment
 
         //LinearLayoutManager
         LinearLayoutManager = new LinearLayoutManager(getActivity());
+        mRecyclerView.setLayoutManager(LinearLayoutManager);
 
         //Adapter
         mAdapter = new ChannelVideosListAdapter(getActivity());
