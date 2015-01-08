@@ -26,26 +26,11 @@ public class ChannelVideosListAdapter extends RecyclerView.Adapter<ChannelVideos
         mInflater = LayoutInflater.from(context);
     }
 
-    public void swapVideos(ArrayList<Video> videos) {
-        mVideos = videos;
-        notifyDataSetChanged();
-        Log.d(TAG, "Videos swapped!");
-    }
-
     @Override
-    public int getItemCount() {
-        if(mVideos != null)
-            return mVideos.size();
-        else
-            return 0;
-    }
-
-    @Override
-    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View convertView = mInflater.inflate(R.layout.fragment_channel_videos_list, viewGroup, false);
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int i) {
+        View convertView = mInflater.inflate(R.layout.fragment_channel_videos_list, parent, false);
         return new ViewHolder(convertView);
     }
-
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
         Video video = mVideos.get(i);
@@ -53,12 +38,17 @@ public class ChannelVideosListAdapter extends RecyclerView.Adapter<ChannelVideos
         viewHolder.title.setText(video.title);
         viewHolder.subTitle.setText("por " + video.uploadedBy);
     }
-
+    @Override
+    public int getItemCount() {
+        if(mVideos != null)
+            return mVideos.size();
+        else
+            return 0;
+    }
     public static final class ViewHolder extends RecyclerView.ViewHolder {
-
         public ImageView thumbnail;
-        public TextView subTitle;
         public TextView title;
+        public TextView subTitle;
 
         public ViewHolder (View convertView) {
             super(convertView);
@@ -66,5 +56,11 @@ public class ChannelVideosListAdapter extends RecyclerView.Adapter<ChannelVideos
             title = (TextView) convertView.findViewById(R.id.title);
             subTitle = (TextView) convertView.findViewById(R.id.sub_title);
         }
+    }
+
+    public void swapVideos(ArrayList<Video> videos) {
+        mVideos = videos;
+        notifyDataSetChanged();
+        Log.d(TAG, "Videos swapped!");
     }
 }
