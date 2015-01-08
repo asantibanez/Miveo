@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,6 +16,9 @@ import android.widget.AbsListView;
 import com.vorticelabs.miveo.R;
 import com.vorticelabs.miveo.adapters.ChannelVideosListAdapter;
 import com.vorticelabs.miveo.loaders.ChannelVideosLoader;
+import com.vorticelabs.miveo.model.Video;
+
+import java.util.ArrayList;
 
 public class ChannelVideosListFragment extends Fragment
         implements LoaderManager.LoaderCallbacks<ChannelVideosLoader.LoaderResponse>,
@@ -29,10 +33,13 @@ public class ChannelVideosListFragment extends Fragment
 
     //Variables
     private int mChannelId;
-    protected ChannelVideosListAdapter mAdapter;
     private boolean mIsLoadingMore;
+
+    //Recycler
+    protected ChannelVideosListAdapter mAdapter;
     protected RecyclerView mRecyclerView;
-    protected RecyclerView.LayoutManager LinearLayoutManager;
+    protected RecyclerView.LayoutManager mLayoutManager;
+    protected ArrayList<Video> mVideos;
 
     //Callbacks Listener
     private ChannelVideosListFragmentCallbacks mListener;
@@ -53,19 +60,22 @@ public class ChannelVideosListFragment extends Fragment
     //Lifecycle methods
     //onCreateView: inflate view, get parameters, set adapter, init loader
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         View fragmentView = inflater.inflate(R.layout.fragment_channel_videos_list, container, false);
         fragmentView.setTag(TAG);
 
         // RecyclerView
-        mRecyclerView = (RecyclerView) fragmentView.findViewById(R.id.my_recycler_view);
-
-        //LinearLayoutManager
-        LinearLayoutManager = new LinearLayoutManager(getActivity());
-        mRecyclerView.setLayoutManager(LinearLayoutManager);
+        mRecyclerView = (RecyclerView) getActivity().findViewById(R.id.my_recycler_view);
 
         //Adapter
-        mAdapter = new ChannelVideosListAdapter(getActivity());
+        mAdapter = new ChannelVideosListAdapter(mVideos, R.layout.fragment_channel_videos_list);
         mRecyclerView.setAdapter(mAdapter);
+
+        //LinearLayoutManager
+        mLayoutManager = new LinearLayoutManager(getActivity());
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
+        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
         //Handle state
         if(savedInstanceState != null) {

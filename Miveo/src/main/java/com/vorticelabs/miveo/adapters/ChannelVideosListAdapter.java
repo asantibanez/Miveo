@@ -1,6 +1,5 @@
 package com.vorticelabs.miveo.adapters;
 
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,25 +18,31 @@ public class ChannelVideosListAdapter extends RecyclerView.Adapter<ChannelVideos
     public static final String TAG = ChannelVideosListAdapter.class.getSimpleName();
 
     private ArrayList<Video> mVideos;
-    private LayoutInflater mInflater;
+    private int itemLayout;
 
-    public ChannelVideosListAdapter(Context context){
-        super();
-        mInflater = LayoutInflater.from(context);
+    public ChannelVideosListAdapter(ArrayList<Video> mVideos, int itemLayout){
+        this.mVideos = mVideos;
+        this.itemLayout = itemLayout;
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int i) {
-        View convertView = mInflater.inflate(R.layout.fragment_channel_videos_list, parent, false);
+    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+
+        View convertView = LayoutInflater.from(viewGroup.getContext()).inflate(itemLayout, viewGroup, false);
         return new ViewHolder(convertView);
+
     }
+
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(final ViewHolder viewHolder, int i) {
+
         Video video = mVideos.get(i);
-        Picasso.with(mInflater.getContext()).load(video.thumbnailUrl).into(viewHolder.thumbnail);
+        Picasso.with(viewHolder.thumbnail.getContext()).load(video.thumbnailUrl).into(viewHolder.thumbnail);
         viewHolder.title.setText(video.title);
         viewHolder.subTitle.setText("por " + video.uploadedBy);
+
     }
+
     @Override
     public int getItemCount() {
         if(mVideos != null)
@@ -45,6 +50,7 @@ public class ChannelVideosListAdapter extends RecyclerView.Adapter<ChannelVideos
         else
             return 0;
     }
+
     public static final class ViewHolder extends RecyclerView.ViewHolder {
         public ImageView thumbnail;
         public TextView title;
@@ -63,4 +69,69 @@ public class ChannelVideosListAdapter extends RecyclerView.Adapter<ChannelVideos
         notifyDataSetChanged();
         Log.d(TAG, "Videos swapped!");
     }
+
+//    private ArrayList<Video> mVideos;
+//    private LayoutInflater mInflater;
+//
+//    public ChannelVideosListAdapter(Context context){
+//        super();
+//        mInflater = LayoutInflater.from(context);
+//    }
+//
+//    public void swapVideos(ArrayList<Video> videos) {
+//        mVideos = videos;
+//        notifyDataSetChanged();
+//        Log.d(TAG, "Videos swapped!");
+//    }
+//
+//    public int getCount() {
+//        if(mVideos != null)
+//            return mVideos.size();
+//        else
+//            return 0;
+//    }
+//
+//    public Video getItem(int i) {
+//        if(mVideos != null && mVideos.size() > 0)
+//            return mVideos.get(i);
+//
+//        return null;
+//    }
+//
+//    public long getItemId(int i) {
+//        if(mVideos != null && mVideos.size() > 0)
+//            return mVideos.get(i).id;
+//
+//        return 0;
+//    }
+//
+//    public View getView(int i, View convertView, ViewGroup viewGroup) {
+//        Video video = getItem(i);
+//
+//        ViewHolder viewHolder;
+//        if(convertView == null) {
+//            convertView = mInflater.inflate(R.layout.list_item_channel_video, viewGroup, false);
+//
+//            viewHolder = new ViewHolder();
+//            viewHolder.thumbnail = (ImageView) convertView.findViewById(R.id.thumbnail);
+//            viewHolder.title = (TextView) convertView.findViewById(R.id.title);
+//            viewHolder.subTitle = (TextView) convertView.findViewById(R.id.sub_title);
+//            convertView.setTag(viewHolder);
+//        }else{
+//            viewHolder = (ViewHolder) convertView.getTag();
+//        }
+//
+//        //Set data
+//        Picasso.with(mInflater.getContext()).load(video.thumbnailUrl).into(viewHolder.thumbnail);
+//        viewHolder.title.setText(video.title);
+//        viewHolder.subTitle.setText("por " + video.uploadedBy);
+//
+//        return convertView;
+//    }
+//
+//    static class ViewHolder{
+//        ImageView thumbnail;
+//        TextView title;
+//        TextView subTitle;
+//    }
 }
