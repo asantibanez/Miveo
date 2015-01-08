@@ -29,5 +29,5 @@ proguard/
 .idea
 gradlew.bat
 
-Miveo.iml
-Vimofit/Vimofit.iml
+# iml Files
+*.iml
