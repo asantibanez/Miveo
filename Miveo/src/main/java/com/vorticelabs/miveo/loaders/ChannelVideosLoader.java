@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.andressantibanez.vimofit.endpoints.ChannelsEndpoint;
 import com.andressantibanez.vimofit.model.responses.ChannelsResponses;
+import com.google.gson.Gson;
 import com.vorticelabs.miveo.extras.Utils;
 import com.vorticelabs.miveo.model.Video;
 
@@ -87,6 +88,10 @@ public class ChannelVideosLoader extends AsyncTaskLoader<ChannelVideosLoader.Loa
 
         public LoaderResponse() {
             videos = new ArrayList<Video>();
+        }
+
+        public String toJson() {
+            return new Gson().toJson(this);
         }
     }
 }

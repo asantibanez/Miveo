@@ -20,6 +20,9 @@ import com.vorticelabs.miveo.model.Video;
 
 import java.util.ArrayList;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+
 public class ChannelVideosListFragment extends Fragment
         implements LoaderManager.LoaderCallbacks<ChannelVideosLoader.LoaderResponse>,
         AbsListView.OnScrollListener{
@@ -27,6 +30,7 @@ public class ChannelVideosListFragment extends Fragment
     public static final String TAG = ChannelVideosListFragment.class.getSimpleName();
 
     //Constants
+    public static final int LAYOUT_RESOURCE_ID = R.layout.fragment_channel_videos_list;
     public static final int LOADER_ID = 1;
     public static final String CHANNEL_ID = "channel_id";
     public static final String IS_LOADING_MORE = "is_loading_more";
@@ -34,12 +38,11 @@ public class ChannelVideosListFragment extends Fragment
     //Variables
     private int mChannelId;
     private boolean mIsLoadingMore;
+    private ChannelVideosListAdapter mAdapter;
+    private ArrayList<Video> mVideos;
 
-    //Recycler
-    protected ChannelVideosListAdapter mAdapter;
-//    protected RecyclerView mRecyclerView;
-   protected ArrayList<Video> mVideos;
-//    protected LinearLayoutManager mLayoutManager;
+    //Controls
+    @InjectView(R.id.my_recycler_view) public RecyclerView mRecyclerView;
 
     //Callbacks Listener
     private ChannelVideosListFragmentCallbacks mListener;
@@ -53,27 +56,19 @@ public class ChannelVideosListFragment extends Fragment
         Bundle args = new Bundle();
         args.putInt(CHANNEL_ID, channelId);
         fragment.setArguments(args);
+
         return fragment;
     }
 
-
     //Lifecycle methods
-    //onCreateView: inflate view, get parameters, set adapter, init loader
+    //onCreateView
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View fragmentView = inflater.inflate(LAYOUT_RESOURCE_ID, container, false);
+        ButterKnife.inject(this, fragmentView);
 
-        View fragmentView = inflater.inflate(R.layout.fragment_channel_videos_list, container, false);
-        fragmentView.setTag(TAG);
-
-//        // RecyclerView
-//        mRecyclerView = (RecyclerView) getActivity().findViewById(R.id.my_recycler_view);
-//
-//        //LinearLayoutManager
-//        mLayoutManager = new LinearLayoutManager(getActivity());
-//        mRecyclerView.setLayoutManager(mLayoutManager);
-//
-//        //Adapter
-//        mAdapter = new ChannelVideosListAdapter(mVideos, R.layout.list_item_channel_video);
-//        mRecyclerView.setAdapter(mAdapter);
+        //Setup init Adapter
+        mVideos = new ArrayList<>();
+        mAdapter = new ChannelVideosListAdapter(mVideos, R.layout.list_item_channel_video);
 
         //Handle state
         if(savedInstanceState != null) {
@@ -84,33 +79,33 @@ public class ChannelVideosListFragment extends Fragment
             mIsLoadingMore = false;
         }
 
-
         //Init loader
         getLoaderManager().initLoader(LOADER_ID, null, this);
 
         return fragmentView;
     }
 
+    //onActivityCreated
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        RecyclerView recyclerView = (RecyclerView) getActivity().findViewById(R.id.my_recycler_view);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setAdapter(new ChannelVideosListAdapter(mVideos, R.layout.list_item_channel_video));
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-
-
+        //Setup RecyclerView for Videos list
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
     }
 
-    //onStart: add onScrollListener to ListView
-    //public void onStart() {
-    //    super.onStart();
-    //    getListView().setOnScrollListener(this);
-    //}
+    //onStart: set onScrollListener for End of Page refresh
+    @Override
+    public void onStart() {
+        super.onStart();
+        //getListView().setOnScrollListener(this);
+    }
 
     //onAttach: get Callbacks listener if available
+    @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
 
@@ -126,6 +121,7 @@ public class ChannelVideosListFragment extends Fragment
     public void onDetach() {
         super.onDetach();
         mListener = null;
+        ButterKnife.reset(this);
     }
 
     //onSaveInstanceState: save necessary variables for recreate
@@ -141,7 +137,8 @@ public class ChannelVideosListFragment extends Fragment
     }
 
     public void onLoadFinished(Loader<ChannelVideosLoader.LoaderResponse> loaderResponseLoader, ChannelVideosLoader.LoaderResponse loaderResponse) {
-        mAdapter.swapVideos(loaderResponse.videos);
+        mVideos = loaderResponse.videos;
+        mAdapter.swapVideos(mVideos);
         mIsLoadingMore = false;
     }
 

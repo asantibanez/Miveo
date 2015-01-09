@@ -17,6 +17,9 @@ import com.vorticelabs.miveo.fragments.ChannelVideosListFragment;
 import com.vorticelabs.miveo.fragments.ChannelsListFragment;
 import com.vorticelabs.miveo.fragments.NavDrawerFragment;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+
 public class HomeActivity extends FragmentActivity
         implements
         NavDrawerFragment.NavDrawerFragmentCallbacks,
@@ -33,16 +36,18 @@ public class HomeActivity extends FragmentActivity
     Fragment mainFragment;
     Fragment drawerFragment;
 
-    //Fragment containers
-    DrawerLayout drawerLayout;
-    FrameLayout mainContainer;
-    FrameLayout drawerContainer;
+    //Controls
+    @InjectView(R.id.drawer_layout) public DrawerLayout drawerLayout;
+    @InjectView(R.id.main_container) public FrameLayout mainContainer;
+    @InjectView(R.id.drawer_container) public FrameLayout drawerContainer;
 
     //Lifecycle methods
     //onCreate
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        ButterKnife.inject(this);
+
         setupViews(savedInstanceState);
         setupNavDrawer(savedInstanceState);
 
@@ -85,10 +90,6 @@ public class HomeActivity extends FragmentActivity
     }
 
     public void setupViews(Bundle savedInstanceState) {
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mainContainer = (FrameLayout) findViewById(R.id.main_container);
-        drawerContainer = (FrameLayout) findViewById(R.id.drawer_container);
-
         //Instance views first time
         if(savedInstanceState == null) {
             mainFragment = ChannelVideosListFragment.newInstance(Constants.VIMEO_STAFF_PICKS_CHANNEL_ID);

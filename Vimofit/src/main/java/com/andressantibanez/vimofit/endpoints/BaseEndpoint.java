@@ -16,7 +16,7 @@ public abstract class BaseEndpoint {
 
     public BaseEndpoint(final OAuthConsumer consumer) {
         this.consumer = consumer;
-        this.logLevel = RestAdapter.LogLevel.BASIC;
+        this.logLevel = RestAdapter.LogLevel.FULL;
 
         restAdapter = new RestAdapter.Builder()
                 .setEndpoint(BASE_ENDPOINT)
