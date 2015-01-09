@@ -77,7 +77,6 @@ public class ChannelVideosLoader extends AsyncTaskLoader<ChannelVideosLoader.Loa
                 lastData.videos.add(data.videos.get(i));
             }
         }
-
         mLoaderResponse = lastData;
         super.deliverResult(mLoaderResponse);
     }
