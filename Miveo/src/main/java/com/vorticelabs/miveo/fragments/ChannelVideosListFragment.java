@@ -105,10 +105,10 @@ public class ChannelVideosListFragment extends Fragment
     }
 
     //onStart: add onScrollListener to ListView
-    //public void onStart() {
-    //    super.onStart();
-    //    getListView().setOnScrollListener(this);
-    //}
+//    public void onStart() {
+//        super.onStart();
+//        getListView().setOnScrollListener(this);
+//    }
 
     //onAttach: get Callbacks listener if available
     public void onAttach(Activity activity) {
