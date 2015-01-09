@@ -23,9 +23,8 @@ import java.util.ArrayList;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-public class ChannelVideosListFragment extends Fragment
-        implements LoaderManager.LoaderCallbacks<ChannelVideosLoader.LoaderResponse>,
-        AbsListView.OnScrollListener{
+public class ChannelVideosListFragment extends Fragment implements
+        LoaderManager.LoaderCallbacks<ChannelVideosLoader.LoaderResponse> {
 
     public static final String TAG = ChannelVideosListFragment.class.getSimpleName();
 
@@ -40,6 +39,7 @@ public class ChannelVideosListFragment extends Fragment
     private boolean mIsLoadingMore;
     private ChannelVideosListAdapter mAdapter;
     private ArrayList<Video> mVideos;
+    private LinearLayoutManager mLinearLayoutManager;
 
     //Controls
     @InjectView(R.id.my_recycler_view) public RecyclerView mRecyclerView;
@@ -90,11 +90,26 @@ public class ChannelVideosListFragment extends Fragment
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        //LayoutManager for RecyclerView
+        mLinearLayoutManager = new LinearLayoutManager(getActivity());
         //Setup RecyclerView for Videos list
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mRecyclerView.setLayoutManager(mLinearLayoutManager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        mRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                int firstVisibleItem = mLinearLayoutManager.findFirstVisibleItemPosition();
+                int visibleItemCount = mLinearLayoutManager.getChildCount();
+                int totalItemCount = mLinearLayoutManager.getItemCount();
+                int indexToLoadMoreData = firstVisibleItem + visibleItemCount + 5;
+                if(!mIsLoadingMore && indexToLoadMoreData >= totalItemCount && totalItemCount != 0){
+                    mIsLoadingMore = true;
+                    getLoaderManager().getLoader(LOADER_ID).forceLoad();
+                }
+            }
+        });
     }
 
     //onStart: set onScrollListener for End of Page refresh
