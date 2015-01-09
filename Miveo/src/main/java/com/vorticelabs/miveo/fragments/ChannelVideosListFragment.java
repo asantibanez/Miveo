@@ -37,9 +37,9 @@ public class ChannelVideosListFragment extends Fragment
 
     //Recycler
     protected ChannelVideosListAdapter mAdapter;
-    protected RecyclerView mRecyclerView;
-    protected RecyclerView.LayoutManager mLayoutManager;
-    protected ArrayList<Video> mVideos;
+//    protected RecyclerView mRecyclerView;
+   protected ArrayList<Video> mVideos;
+//    protected LinearLayoutManager mLayoutManager;
 
     //Callbacks Listener
     private ChannelVideosListFragmentCallbacks mListener;
@@ -64,18 +64,16 @@ public class ChannelVideosListFragment extends Fragment
         View fragmentView = inflater.inflate(R.layout.fragment_channel_videos_list, container, false);
         fragmentView.setTag(TAG);
 
-        // RecyclerView
-        mRecyclerView = (RecyclerView) getActivity().findViewById(R.id.my_recycler_view);
-
-        //Adapter
-        mAdapter = new ChannelVideosListAdapter(mVideos, R.layout.fragment_channel_videos_list);
-        mRecyclerView.setAdapter(mAdapter);
-
-        //LinearLayoutManager
-        mLayoutManager = new LinearLayoutManager(getActivity());
-        mRecyclerView.setLayoutManager(mLayoutManager);
-
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+//        // RecyclerView
+//        mRecyclerView = (RecyclerView) getActivity().findViewById(R.id.my_recycler_view);
+//
+//        //LinearLayoutManager
+//        mLayoutManager = new LinearLayoutManager(getActivity());
+//        mRecyclerView.setLayoutManager(mLayoutManager);
+//
+//        //Adapter
+//        mAdapter = new ChannelVideosListAdapter(mVideos, R.layout.list_item_channel_video);
+//        mRecyclerView.setAdapter(mAdapter);
 
         //Handle state
         if(savedInstanceState != null) {
@@ -91,6 +89,19 @@ public class ChannelVideosListFragment extends Fragment
         getLoaderManager().initLoader(LOADER_ID, null, this);
 
         return fragmentView;
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        RecyclerView recyclerView = (RecyclerView) getActivity().findViewById(R.id.my_recycler_view);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setAdapter(new ChannelVideosListAdapter(mVideos, R.layout.list_item_channel_video));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+
     }
 
     //onStart: add onScrollListener to ListView
