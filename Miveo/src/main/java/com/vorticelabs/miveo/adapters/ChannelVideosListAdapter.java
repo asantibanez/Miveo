@@ -28,7 +28,12 @@ public class ChannelVideosListAdapter extends RecyclerView.Adapter<ChannelVideos
     @Override
     public ChannelVideosListAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(itemLayout, viewGroup, false);
-        return new ViewHolder(v);
+
+        ChannelVideosListAdapter.ViewHolder vh = new ViewHolder(v, new ViewHolder.OnItemClick() {
+            public void onItemClick(int position){ }
+        });
+
+        return vh;
     }
 
     @Override
@@ -37,7 +42,7 @@ public class ChannelVideosListAdapter extends RecyclerView.Adapter<ChannelVideos
 
         Picasso.with(viewHolder.thumbnail.getContext()).load(video.thumbnailUrl).into(viewHolder.thumbnail);
         viewHolder.title.setText(video.title);
-        viewHolder.subtitle.setText(video.uploadedBy);
+        viewHolder.subtitle.setText("por " + video.uploadedBy);
     }
 
     @Override
@@ -48,70 +53,36 @@ public class ChannelVideosListAdapter extends RecyclerView.Adapter<ChannelVideos
             return 0;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         ImageView thumbnail;
         TextView title;
         TextView subtitle;
 
-        public ViewHolder(View itemView) {
+        private OnItemClick mListener;
+
+        public ViewHolder(View itemView, OnItemClick listener) {
             super(itemView);
+
+            mListener = listener;
 
             thumbnail = (ImageView) itemView.findViewById(R.id.thumbnail);
             title = (TextView) itemView.findViewById(R.id.title);
             subtitle = (TextView) itemView.findViewById(R.id.sub_title);
 
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            mListener.onItemClick(getPosition());
+            Log.d(TAG, "Element " + getPosition() + " clicked.");
+        }
+
+        public interface OnItemClick {
+            public void onItemClick(int position);
         }
     }
-
-//    private ArrayList<Video> mVideos;
-//    private int itemLayout;
-//    private Context mContext;
-//
-//
-//    public ChannelVideosListAdapter(ArrayList<Video> mVideos, int itemLayout){
-//        this.mVideos = mVideos;
-//        this.itemLayout = itemLayout;
-//    }
-//
-//    @Override
-//    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-//
-//        View convertView = LayoutInflater.from(viewGroup.getContext()).inflate(itemLayout, viewGroup, false);
-//        return new ViewHolder(convertView);
-//
-//    }
-//
-//    @Override
-//    public void onBindViewHolder(final ViewHolder viewHolder, int i) {
-//
-//        Video video = mVideos.get(i);
-//        Picasso.with(mContext).load(video.thumbnailUrl).into(viewHolder.thumbnail);
-//        viewHolder.title.setText(video.title);
-//        viewHolder.subTitle.setText("por " + video.uploadedBy);
-//
-//    }
-//
-//    @Override
-//    public int getItemCount() {
-//        if(mVideos != null)
-//            return mVideos.size();
-//        else
-//            return 0;
-//    }
-//
-//    public static final class ViewHolder extends RecyclerView.ViewHolder {
-//        public ImageView thumbnail;
-//        public TextView title;
-//        public TextView subTitle;
-//
-//        public ViewHolder (View convertView) {
-//            super(convertView);
-//            thumbnail = (ImageView) convertView.findViewById(R.id.thumbnail);
-//            title = (TextView) convertView.findViewById(R.id.title);
-//            subTitle = (TextView) convertView.findViewById(R.id.sub_title);
-//        }
-//    }
 
     public void swapVideos(ArrayList<Video> videos) {
         mVideos = videos;

@@ -112,13 +112,6 @@ public class ChannelVideosListFragment extends Fragment implements
         });
     }
 
-    //onStart: set onScrollListener for End of Page refresh
-    @Override
-    public void onStart() {
-        super.onStart();
-        //getListView().setOnScrollListener(this);
-    }
-
     //onAttach: get Callbacks listener if available
     @Override
     public void onAttach(Activity activity) {
@@ -180,6 +173,8 @@ public class ChannelVideosListFragment extends Fragment implements
     //        mListener.onChannelVideoClick(mChannelId, getListAdapter().getItemId(position));
     //    }
     //}
+
+
 
     //Interface for Callbacks
     public interface ChannelVideosListFragmentCallbacks{
