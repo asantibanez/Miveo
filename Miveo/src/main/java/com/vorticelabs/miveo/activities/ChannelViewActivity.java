@@ -1,13 +1,13 @@
 package com.vorticelabs.miveo.activities;
 
-import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -16,7 +16,7 @@ import com.vorticelabs.miveo.R;
 import com.vorticelabs.miveo.fragments.ChannelInfoFragment;
 import com.vorticelabs.miveo.fragments.ChannelVideosListFragment;
 
-public class ChannelViewActivity extends FragmentActivity
+public class ChannelViewActivity extends ActionBarActivity
     implements ChannelVideosListFragment.ChannelVideosListFragmentCallbacks {
 
     public final static String TAG = ChannelViewActivity.class.getSimpleName();
@@ -61,8 +61,9 @@ public class ChannelViewActivity extends FragmentActivity
         mTabs.setViewPager(mPager);
 
         //ActionBar return action
-        ActionBar actionBar = getActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        Toolbar toolbar = (Toolbar)findViewById(R.id.channel_toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     //onSaveInstanceState

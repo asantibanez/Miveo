@@ -1,13 +1,13 @@
 package com.vorticelabs.miveo.activities;
 
-import android.app.ActionBar;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -21,7 +21,7 @@ import com.vorticelabs.miveo.fragments.NavDrawerFragment;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-public class HomeActivity extends FragmentActivity
+public class HomeActivity extends ActionBarActivity
         implements
         NavDrawerFragment.NavDrawerFragmentCallbacks,
         ChannelsListFragment.ChannelsListFragmentCallbacks,
@@ -32,7 +32,6 @@ public class HomeActivity extends FragmentActivity
     //Variables
     private CharSequence mTitle;
     private ActionBarDrawerToggle mDrawerToggle;
-    private CharSequence mDrawerTitle;
 
     //Fragments
     Fragment mainFragment;
@@ -55,10 +54,15 @@ public class HomeActivity extends FragmentActivity
     }
 
     public void setupNavDrawer(Bundle savedInstanceState) {
-        mTitle = mDrawerTitle = getTitle();
-        final ActionBar actionBar = getActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setHomeButtonEnabled(true);
+
+        Toolbar toolbar = (Toolbar)findViewById(R.id.my_awesome_toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+
+//        final ActionBar actionBar = getActionBar();
+//        actionBar.setDisplayHomeAsUpEnabled(true);
+//        actionBar.setHomeButtonEnabled(true);
 
         mDrawerToggle = new ActionBarDrawerToggle(
                 this,
@@ -68,14 +72,12 @@ public class HomeActivity extends FragmentActivity
         ){
             public void onDrawerClosed(View view){
                 super.onDrawerClosed(view);
-                actionBar.setTitle(mTitle);
-                invalidateOptionsMenu();
+                getSupportActionBar().setTitle("Home");
             }
 
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
-                actionBar.setTitle("Home");
-                invalidateOptionsMenu();
+                getSupportActionBar().setTitle("Miveo");
             }
         };
 
@@ -125,7 +127,6 @@ public class HomeActivity extends FragmentActivity
                         .commit();
                 break;
         }
-        setTitle(mTitle[position]);
         drawerLayout.closeDrawer(drawerContainer);
     }
 
@@ -149,6 +150,8 @@ public class HomeActivity extends FragmentActivity
         Intent videoActivityIntent = VideoViewActivity.getStartActivityIntent(this, channelId, videoId);
         startActivity(videoActivityIntent);
     }
+
+
 
     /*
     @Override
