@@ -77,6 +77,8 @@ public class ChannelVideosListAdapter extends RecyclerView.Adapter<ChannelVideos
         public void onClick(View v) {
             mListener.onItemClick(getPosition());
             Log.d(TAG, "Element " + getPosition() + " clicked.");
+
+
         }
 
         public interface OnItemClick {

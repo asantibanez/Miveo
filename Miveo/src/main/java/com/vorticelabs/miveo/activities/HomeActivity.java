@@ -4,11 +4,12 @@ import android.app.ActionBar;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.FrameLayout;
 
 import com.vorticelabs.miveo.R;
@@ -31,6 +32,7 @@ public class HomeActivity extends FragmentActivity
     //Variables
     private CharSequence mTitle;
     private ActionBarDrawerToggle mDrawerToggle;
+    private CharSequence mDrawerTitle;
 
     //Fragments
     Fragment mainFragment;
@@ -50,31 +52,33 @@ public class HomeActivity extends FragmentActivity
 
         setupViews(savedInstanceState);
         setupNavDrawer(savedInstanceState);
-
-        /*
-        mNavigationDrawerFragment = (NavigationDrawerFragment)
-                getFragmentManager().findFragmentById(R.id.navigation_drawer);
-        mTitle = getTitle();
-
-        // Set up the drawer.
-        mNavigationDrawerFragment.setUp(
-                R.id.navigation_drawer,
-                (DrawerLayout) findViewById(R.id.drawer_layout));
-        */
     }
 
     public void setupNavDrawer(Bundle savedInstanceState) {
-        ActionBar actionBar = getActionBar();
+        mTitle = mDrawerTitle = getTitle();
+        final ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
 
         mDrawerToggle = new ActionBarDrawerToggle(
                 this,
                 drawerLayout,
-                R.drawable.ic_drawer,
                 R.string.navigation_drawer_open,
                 R.string.navigation_drawer_close
-        );
+        ){
+            public void onDrawerClosed(View view){
+                super.onDrawerClosed(view);
+                actionBar.setTitle(mTitle);
+                invalidateOptionsMenu();
+            }
+
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                actionBar.setTitle("Home");
+                invalidateOptionsMenu();
+            }
+        };
+
         drawerLayout.post(new Runnable() {
             @Override
             public void run() {
@@ -121,6 +125,7 @@ public class HomeActivity extends FragmentActivity
                         .commit();
                 break;
         }
+        setTitle(mTitle[position]);
         drawerLayout.closeDrawer(drawerContainer);
     }
 
