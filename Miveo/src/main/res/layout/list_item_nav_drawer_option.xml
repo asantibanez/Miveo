@@ -11,13 +11,13 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:paddingStart="16dp"
-        android:tint="@color/primary_text"/>
+        android:tint="@color/icons"/>
 
     <TextView
         android:id="@+id/option_title"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:textColor="@color/primary_light"
+        android:textColor="@color/icons"
         android:layout_marginStart="72dp"
         android:textAppearance="@android:style/TextAppearance.Material.Body2"
         android:gravity="center_vertical" />

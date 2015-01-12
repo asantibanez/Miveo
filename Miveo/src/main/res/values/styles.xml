@@ -12,8 +12,7 @@
     <style name="AppTheme.NoTitleBar">
         <item name="windowActionBar">false</item>
         <item name="android:windowNoTitle">true</item>
-        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
-        <item name="android:statusBarColor">@android:color/transparent</item>
+
         <item name="android:activatedBackgroundIndicator">@drawable/list_activated_background</item>
     </style>
 

@@ -7,4 +7,4 @@
     android:choiceMode="singleChoice"
     android:divider="@android:color/darker_gray"
     android:dividerHeight="0dp"
-    android:background="@color/primary" />
+    android:background="@color/primary_text" />
