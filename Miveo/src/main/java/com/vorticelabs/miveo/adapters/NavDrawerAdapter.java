@@ -72,16 +72,16 @@ public class NavDrawerAdapter extends ArrayAdapter<String> {
                 //Icon
                 switch (position) {
                     case 0:
-                        viewHolder.icon.setImageResource(R.drawable.ic_nv_staffpicks);
+                        viewHolder.icon.setImageResource(R.drawable.ic_canales_destacados);
                         break;
                     case 1:
-                        viewHolder.icon.setImageResource(R.drawable.ic_menu_channels);
+                        viewHolder.icon.setImageResource(R.drawable.ic_videos_destacados);
                         break;
                     case 2:
-                        viewHolder.icon.setImageResource(R.drawable.ic_menu_favorites);
+                        viewHolder.icon.setImageResource(R.drawable.ic_videos_favoritos);
                         break;
                     case 3:
-                        viewHolder.icon.setImageResource(R.drawable.ic_nv_watchlater_4);
+                        viewHolder.icon.setImageResource(R.drawable.ic_videos_verluego);
                         break;
                 }
 
@@ -91,7 +91,6 @@ public class NavDrawerAdapter extends ArrayAdapter<String> {
                 if (convertView == null) {
                     convertView = mInflater.inflate(SUB_OPTION_VIEW_RESOURCE_ID, parent, false);
                     viewHolder = new ViewHolder();
-                    viewHolder.icon = (ImageView) convertView.findViewById(R.id.option_icon);
                     viewHolder.title = (TextView) convertView.findViewById(R.id.option_title);
                     convertView.setTag(viewHolder);
                 } else {
@@ -102,14 +101,14 @@ public class NavDrawerAdapter extends ArrayAdapter<String> {
                 //Title
                 viewHolder.title.setText(getItem(position));
                 //Icon
-                switch (position) {
-                    case 4:
-                        viewHolder.icon.setImageResource(R.drawable.ic_menu_feedback);
-                        break;
-                    case 5:
-                        viewHolder.icon.setImageResource(R.drawable.ic_menu_settings);
-                        break;
-                }
+//                switch (position) {
+//                    case 4:
+//                        viewHolder.icon.setImageResource(R.drawable.ic_menu_feedback);
+//                        break;
+//                    case 5:
+//                        viewHolder.icon.setImageResource(R.drawable.ic_menu_settings);
+//                        break;
+//                }
         }
 
         return convertView;
