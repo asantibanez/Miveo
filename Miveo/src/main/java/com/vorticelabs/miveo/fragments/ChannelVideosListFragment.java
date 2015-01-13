@@ -8,6 +8,7 @@ import android.support.v4.content.Loader;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +25,8 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 public class ChannelVideosListFragment extends Fragment implements
-        LoaderManager.LoaderCallbacks<ChannelVideosLoader.LoaderResponse> {
+        LoaderManager.LoaderCallbacks<ChannelVideosLoader.LoaderResponse>,
+        ChannelVideosListAdapter.ChannelVideosAdapterListener {
 
     public static final String TAG = ChannelVideosListFragment.class.getSimpleName();
 
@@ -69,6 +71,7 @@ public class ChannelVideosListFragment extends Fragment implements
         //Setup init Adapter
         mVideos = new ArrayList<>();
         mAdapter = new ChannelVideosListAdapter(mVideos, R.layout.list_item_channel_video);
+        mAdapter.setChannelVideosAdapterListener(this);
 
         //Handle state
         if(savedInstanceState != null) {
@@ -162,6 +165,13 @@ public class ChannelVideosListFragment extends Fragment implements
         if(!mIsLoadingMore && indexToLoadMoreData >= totalItemCount && totalItemCount != 0){
             mIsLoadingMore = true;
             getLoaderManager().getLoader(LOADER_ID).forceLoad();
+        }
+    }
+
+    @Override
+    public void onItemClick(int position) {
+        if(mListener != null) {
+            mListener.onChannelVideoClick(mChannelId, mVideos.get(position).id);
         }
     }
 

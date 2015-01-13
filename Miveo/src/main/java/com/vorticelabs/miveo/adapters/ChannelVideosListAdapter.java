@@ -18,10 +18,21 @@ import com.vorticelabs.miveo.model.Video;
 import java.util.ArrayList;
 
 public class ChannelVideosListAdapter extends RecyclerView.Adapter<ChannelVideosListAdapter.ViewHolder> {
+
     public static final String TAG = ChannelVideosListAdapter.class.getSimpleName();
 
-    ArrayList<Video> mVideos;
-    int itemLayout;
+    private ArrayList<Video> mVideos;
+    private int itemLayout;
+
+    //Listener for item click events
+    private ChannelVideosAdapterListener mListener;
+    public void setChannelVideosAdapterListener(ChannelVideosAdapterListener listener) {
+        mListener = listener;
+    }
+
+    public interface ChannelVideosAdapterListener {
+        public void onItemClick(int position);
+    }
 
     public ChannelVideosListAdapter(ArrayList<Video> mVideos, int itemLayout){
         this.itemLayout = itemLayout;
@@ -30,13 +41,8 @@ public class ChannelVideosListAdapter extends RecyclerView.Adapter<ChannelVideos
 
     @Override
     public ChannelVideosListAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(itemLayout, viewGroup, false);
-
-        ChannelVideosListAdapter.ViewHolder vh = new ViewHolder(v, new ViewHolder.OnItemClick() {
-            public void onItemClick(int position){ }
-        });
-
-        return vh;
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(itemLayout, viewGroup, false);
+        return new ViewHolder(view, mListener);
     }
 
     @Override
@@ -62,9 +68,9 @@ public class ChannelVideosListAdapter extends RecyclerView.Adapter<ChannelVideos
         TextView title;
         TextView subtitle;
 
-        private OnItemClick mListener;
+        private ChannelVideosAdapterListener mListener;
 
-        public ViewHolder(View itemView, OnItemClick listener) {
+        public ViewHolder(View itemView, ChannelVideosAdapterListener listener) {
             super(itemView);
 
             mListener = listener;
@@ -78,17 +84,11 @@ public class ChannelVideosListAdapter extends RecyclerView.Adapter<ChannelVideos
 
         @Override
         public void onClick(View v) {
-            mListener.onItemClick(getPosition());
             Log.d(TAG, "Element " + getPosition() + " clicked.");
-
-            Context context = itemView.getContext();
-            Intent intent = new Intent(context, VideoViewActivity.class);
-            context.startActivity(intent);
+            if(mListener != null)
+                mListener.onItemClick(getPosition());
         }
 
-        public interface OnItemClick {
-            public void onItemClick(int position);
-        }
     }
 
     public void swapVideos(ArrayList<Video> videos) {
