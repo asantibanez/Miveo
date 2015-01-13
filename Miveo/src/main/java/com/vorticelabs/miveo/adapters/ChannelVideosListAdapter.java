@@ -1,5 +1,7 @@
 package com.vorticelabs.miveo.adapters;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,6 +12,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.vorticelabs.miveo.R;
+import com.vorticelabs.miveo.activities.VideoViewActivity;
 import com.vorticelabs.miveo.model.Video;
 
 import java.util.ArrayList;
@@ -78,7 +81,9 @@ public class ChannelVideosListAdapter extends RecyclerView.Adapter<ChannelVideos
             mListener.onItemClick(getPosition());
             Log.d(TAG, "Element " + getPosition() + " clicked.");
 
-
+            Context context = itemView.getContext();
+            Intent intent = new Intent(context, VideoViewActivity.class);
+            context.startActivity(intent);
         }
 
         public interface OnItemClick {

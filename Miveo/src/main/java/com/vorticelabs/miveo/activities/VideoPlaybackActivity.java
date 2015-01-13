@@ -1,22 +1,16 @@
 package com.vorticelabs.miveo.activities;
 
-import android.app.ActionBar;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
-import android.util.Log;
-import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
+
 import com.vorticelabs.miveo.R;
 import com.vorticelabs.miveo.fragments.VideoPlaybackFragment;
-import com.vorticelabs.miveo.views.VimeoPlayerView;
 
-public class VideoPlaybackActivity extends FragmentActivity {
+public class VideoPlaybackActivity extends ActionBarActivity {
 
     public static final String TAG = VideoPlaybackActivity.class.getSimpleName();
 
@@ -61,8 +55,9 @@ public class VideoPlaybackActivity extends FragmentActivity {
         }
 
         //Hide ActionBar
-        ActionBar actionBar = getActionBar();
-        actionBar.hide();
+        Toolbar toolbar = (Toolbar)findViewById(R.id.video_playback_toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().hide();
     }
 
     //onSaveInstanceState

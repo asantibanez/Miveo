@@ -1,29 +1,24 @@
 package com.vorticelabs.miveo.activities;
 
-import android.app.ActionBar;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
-import android.util.Log;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.VideoView;
 
 import com.squareup.picasso.Picasso;
 import com.vorticelabs.miveo.R;
 import com.vorticelabs.miveo.loaders.VideoLoader;
 import com.vorticelabs.miveo.model.Video;
 
-import org.w3c.dom.Text;
-
-public class VideoViewActivity extends FragmentActivity
+public class VideoViewActivity extends ActionBarActivity
     implements LoaderManager.LoaderCallbacks<VideoLoader.LoaderResponse> {
 
     public static final String TAG = VideoViewActivity.class.getSimpleName();
@@ -73,8 +68,10 @@ public class VideoViewActivity extends FragmentActivity
         }
 
         //ActionBar Up Navigation
-        ActionBar actionBar = getActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        Toolbar toolbar = (Toolbar)findViewById(R.id.video_view_toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
 
         //Init loader
         getSupportLoaderManager().initLoader(0, null, this);
