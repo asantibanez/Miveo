@@ -1,23 +1,15 @@
 package com.vorticelabs.miveo.views;
 
-import android.app.Activity;
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.webkit.GeolocationPermissions;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
-
-import com.vorticelabs.miveo.R;
 
 public class VimeoPlayerView extends WebView {
 
@@ -35,7 +27,7 @@ public class VimeoPlayerView extends WebView {
 
     public void setVideoId(long videoId) {
         Log.d(TAG, "Setting Video Id");
-        loadUrl("http://player.vimeo.com/video/" + videoId);
+        loadUrl("http://player.vimeo.com/video/" + videoId + "?autoplay=1");
     }
 
     //VimeoWebChromeClient class

@@ -42,5 +42,5 @@ dependencies {
     compile 'com.viewpagerindicator:library:2.4.1'
 
     //Tab Strip
-    compile 'com.astuetz:pagerslidingtabstrip:1.0.1'
+    compile 'com.jpardogo.materialtabstrip:library:1.0.7'
 }
