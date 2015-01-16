@@ -16,6 +16,6 @@
         android:textColor="@color/icons"
         android:gravity="center_vertical"
         android:layout_alignParentBottom="true"
-        android:textAppearance="@android:style/TextAppearance.Material.Body1" />
+        android:textSize="14sp"/>
 
 </RelativeLayout>

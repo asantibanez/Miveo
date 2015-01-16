@@ -106,12 +106,14 @@ public class HomeActivity extends ActionBarActivity
         switch (position) {
             case 0:
                 mainFragment = ChannelVideosListFragment.newInstance(Constants.VIMEO_STAFF_PICKS_CHANNEL_ID);
+                getSupportActionBar().setTitle(R.string.title_section1);
                 getSupportFragmentManager().beginTransaction()
                         .replace(mainContainer.getId(), mainFragment)
                         .commit();
                 break;
             case 1:
                 mainFragment = ChannelsListFragment.newInstance();
+                getSupportActionBar().setTitle(R.string.title_section2);
                 getSupportFragmentManager().beginTransaction()
                         .replace(mainContainer.getId(), mainFragment)
                         .commit();
@@ -147,7 +149,6 @@ public class HomeActivity extends ActionBarActivity
         Intent videoActivityIntent = VideoViewActivity.getStartActivityIntent(this, channelId, videoId);
         startActivity(videoActivityIntent);
     }
-
 
 
     /*

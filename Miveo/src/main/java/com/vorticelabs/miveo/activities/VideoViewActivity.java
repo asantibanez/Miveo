@@ -30,6 +30,7 @@ public class VideoViewActivity extends ActionBarActivity
     //Variables
     private int mChannelId;
     private long mVideoId;
+    private Video mVideo;
 
     //Controls
     private ImageView mThumbnail;
@@ -72,6 +73,8 @@ public class VideoViewActivity extends ActionBarActivity
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setTitle("Video");
+        //getSupportActionBar().setTitle(String.format("%s", mVideo.title));
 
         //Init loader
         getSupportLoaderManager().initLoader(0, null, this);

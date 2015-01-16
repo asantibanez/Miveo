@@ -15,6 +15,7 @@ import com.astuetz.PagerSlidingTabStrip;
 import com.vorticelabs.miveo.R;
 import com.vorticelabs.miveo.fragments.ChannelInfoFragment;
 import com.vorticelabs.miveo.fragments.ChannelVideosListFragment;
+import com.vorticelabs.miveo.model.Channel;
 
 public class ChannelViewActivity extends ActionBarActivity
     implements ChannelVideosListFragment.ChannelVideosListFragmentCallbacks {
@@ -27,6 +28,7 @@ public class ChannelViewActivity extends ActionBarActivity
     //Variables
     private int mId;
     private ChannelPagerAdapter mPagerAdapter;
+    private Channel mChannel;
 
     //Controls
     private ViewPager mPager;
@@ -64,6 +66,8 @@ public class ChannelViewActivity extends ActionBarActivity
         Toolbar toolbar = (Toolbar)findViewById(R.id.channel_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Canal");
+        //getSupportActionBar().setTitle(String.format("%s", mVideo.title));
     }
 
     //onSaveInstanceState

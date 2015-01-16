@@ -13,6 +13,7 @@
     <string name="title_section2">Canales Destacados</string>
     <string name="title_section3">Favoritos</string>
     <string name="title_section4">Ver Luego</string>
+
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_example">Example action</string>
@@ -25,8 +26,8 @@
         <item>Canales Destacados</item>
         <item>Favoritos</item>
         <item>Ver Luego</item>
-        <item>Enviar comentarios</item>
         <item>Ajustes</item>
+        <item>Ayuda</item>
     </string-array>
 
     <!-- Channel View strings -->

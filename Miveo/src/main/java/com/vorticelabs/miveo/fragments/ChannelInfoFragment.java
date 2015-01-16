@@ -20,8 +20,6 @@ import com.vorticelabs.miveo.R;
 import com.vorticelabs.miveo.extras.Utils;
 import com.vorticelabs.miveo.model.Channel;
 
-import retrofit.RestAdapter;
-
 public class ChannelInfoFragment extends Fragment
     implements LoaderManager.LoaderCallbacks<Channel>{
 
@@ -103,8 +101,8 @@ public class ChannelInfoFragment extends Fragment
                 Picasso.with(getActivity()).load(mChannel.logoUrl).into(thumbnail);
 
             description.setText(mChannel.description);
-            videosCount.setText(String.format("%d", mChannel.totalVideos));
-            subscribersCount.setText(String.format("%d", mChannel.totalSubscribers));
+            videosCount.setText("Videos: " + String.format("%d", mChannel.totalVideos));
+            subscribersCount.setText("Suscriptores: " + String.format("%d", mChannel.totalSubscribers));
         }
     }
 
