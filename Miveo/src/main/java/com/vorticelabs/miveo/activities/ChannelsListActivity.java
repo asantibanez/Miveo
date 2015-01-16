@@ -3,8 +3,6 @@ package com.vorticelabs.miveo.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.view.Menu;
-import android.view.MenuItem;
 
 import com.vorticelabs.miveo.R;
 import com.vorticelabs.miveo.fragments.ChannelsListFragment;
@@ -31,23 +29,23 @@ public class ChannelsListActivity extends FragmentActivity
         }
     }
 
-    //Menu methods
-    //onCreateOptionsMenu
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.home, menu);
-        return true;
-    }
-    //onOptionsItemSelected
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+//    //Menu methods
+//    //onCreateOptionsMenu
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.home, menu);
+//        return true;
+//    }
+//    //onOptionsItemSelected
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        // Handle action bar item clicks here. The action bar will
+//        // automatically handle clicks on the Home/Up button, so long
+//        // as you specify a parent activity in AndroidManifest.xml.
+//        int id = item.getItemId();
+//        if (id == R.id.action_settings) {
+//            finish();
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
 
     //Callbacks
     public void onChannelSelected(int channelId) {

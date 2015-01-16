@@ -8,8 +8,8 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.FrameLayout;
 
 import com.vorticelabs.miveo.R;
@@ -64,26 +64,12 @@ public class HomeActivity extends ActionBarActivity
         drawerLayout.setStatusBarBackgroundColor(
                 getResources().getColor(R.color.primary_dark));
 
-//        final ActionBar actionBar = getActionBar();
-//        actionBar.setDisplayHomeAsUpEnabled(true);
-//        actionBar.setHomeButtonEnabled(true);
-
         mDrawerToggle = new ActionBarDrawerToggle(
                 this,
                 drawerLayout,
                 R.string.navigation_drawer_open,
                 R.string.navigation_drawer_close
-        ){
-            public void onDrawerClosed(View view){
-                super.onDrawerClosed(view);
-                getSupportActionBar().setTitle("Home");
-            }
-
-            public void onDrawerOpened(View drawerView) {
-                super.onDrawerOpened(drawerView);
-                getSupportActionBar().setTitle("Miveo");
-            }
-        };
+        );
 
         drawerLayout.post(new Runnable() {
             @Override
@@ -134,6 +120,13 @@ public class HomeActivity extends ActionBarActivity
         drawerLayout.closeDrawer(drawerContainer);
     }
 
+    //Menu methods
+    //onCreateOptionsMenu
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.home, menu);
+        return true;
+    }
+    //onOptionsItemSelected
     public boolean onOptionsItemSelected(MenuItem item) {
         if (mDrawerToggle.onOptionsItemSelected(item)) {
             return true;

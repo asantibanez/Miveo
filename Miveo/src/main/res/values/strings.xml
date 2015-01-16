@@ -6,6 +6,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_home">Miveo</string>
+    <string name="action_login">Login</string>
 
     <!-- App Sections -->
     <string name="title_section1">Staff Picks</string>
