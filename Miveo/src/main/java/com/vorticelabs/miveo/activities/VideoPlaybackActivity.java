@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 
 import com.vorticelabs.miveo.R;
 import com.vorticelabs.miveo.fragments.VideoPlaybackFragment;
@@ -36,6 +37,8 @@ public class VideoPlaybackActivity extends ActionBarActivity {
         //Setup view
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_playback);
+
+        setupFullscreenMode();
 
         //Handle state
         if(savedInstanceState != null) {
@@ -71,5 +74,35 @@ public class VideoPlaybackActivity extends ActionBarActivity {
         super.onStop();
         mPlaybackFragment.stopPlayback();
         finish();
+    }
+
+    private void setupFullscreenMode() {
+        View decorView = setFullscreen();
+        decorView
+                .setOnSystemUiVisibilityChangeListener(new View.OnSystemUiVisibilityChangeListener() {
+                    @Override
+                    public void onSystemUiVisibilityChange(int visibility) {
+                        setFullscreen();
+                    }
+                });
+    }
+
+    private View setFullscreen() {
+        View decorView = getWindow().getDecorView();
+        decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+        return decorView;
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if (hasFocus) {
+            setFullscreen();
+        }
     }
 }
