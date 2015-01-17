@@ -2,69 +2,109 @@ package com.vorticelabs.miveo.fragments;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v4.app.ListFragment;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
-import android.widget.ListView;
 
 import com.vorticelabs.miveo.R;
 import com.vorticelabs.miveo.adapters.ChannelsListAdapter;
 import com.vorticelabs.miveo.loaders.ChannelsLoader;
+import com.vorticelabs.miveo.model.Channel;
 
-public class ChannelsListFragment extends ListFragment
-    implements
+import java.util.ArrayList;
+
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+
+public class ChannelsListFragment extends Fragment implements
         LoaderManager.LoaderCallbacks<ChannelsLoader.LoaderResponse>,
-        AbsListView.OnScrollListener{
+        ChannelsListAdapter.ChannelsAdapterListener
+        {
 
     public final static String TAG = ChannelsListFragment.class.getSimpleName();
 
     //Constants
+    public static final int LAYOUT_RESOURCE_ID = R.layout.fragment_channels_list;
     public final static String IS_LOADING_MORE = "is_loading_more";
+    public static final int LOADER_ID = 1;
 
     //Variables
-    private ChannelsListFragmentCallbacks mListener;
-    private ChannelsListAdapter mAdapter;
     private boolean mIsLoadingMore;
+    private ChannelsListAdapter mAdapter;
+    private ArrayList<Channel> mChannels;
+    private LinearLayoutManager mLinearLayoutManager;
+
+    //Controls
+    @InjectView(R.id.channel_recyclerview) public RecyclerView mRecyclerView;
+
+    //Callbacks Listener
+    private ChannelsListFragmentCallbacks mChannelListener;
+
+    //Mandatory empty constructor
+    public ChannelsListFragment(){}
 
     //newInstance factory method
     public static ChannelsListFragment newInstance() {
         ChannelsListFragment fragment = new ChannelsListFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
+
         return fragment;
     }
-
-    //Mandatory empty constructor
-    public ChannelsListFragment() {}
 
     //Lifecycle methods
     //onCreateView: instance views, set adapter
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View fragmentView = inflater.inflate(R.layout.fragment_channels_list, container, false);
+        View fragmentView = inflater.inflate(LAYOUT_RESOURCE_ID, container, false);
+        ButterKnife.inject(this, fragmentView);
+
+        //Setup init Adapter
+        mChannels = new ArrayList<>();
+        mAdapter = new ChannelsListAdapter(mChannels, R.layout.list_item_channel);
+        mAdapter.setChannelsAdapterListener(this);
 
         //Handle instance state
         if(savedInstanceState != null){
             mIsLoadingMore = savedInstanceState.getBoolean(IS_LOADING_MORE);
         }
 
-        //Set adapter
-        mAdapter = new ChannelsListAdapter(getActivity());
-        setListAdapter(mAdapter);
-
         //Init loader
-        getLoaderManager().initLoader(0, null, this);
+        getLoaderManager().initLoader(LOADER_ID, null, this);
 
         return fragmentView;
     }
 
-    //onStart: set OnScrollListener
-    public void onStart() {
-        super.onStart();
-        getListView().setOnScrollListener(this);
+    //onActivityCreated
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        //LayoutManager for RecyclerView
+        mLinearLayoutManager = new LinearLayoutManager(getActivity());
+        //Setup RecyclerView for Videos list
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setLayoutManager(mLinearLayoutManager);
+        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        mRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                int firstVisibleItem = mLinearLayoutManager.findFirstVisibleItemPosition();
+                int visibleItemCount = mLinearLayoutManager.getChildCount();
+                int totalItemCount = mLinearLayoutManager.getItemCount();
+                int indexToLoadMoreData = firstVisibleItem + visibleItemCount + 5;
+                if (!mIsLoadingMore && indexToLoadMoreData >= totalItemCount && totalItemCount != 0) {
+                    mIsLoadingMore = true;
+                    getLoaderManager().getLoader(LOADER_ID).forceLoad();
+                }
+            }
+        });
     }
 
     //onSaveInstanceState
@@ -73,21 +113,18 @@ public class ChannelsListFragment extends ListFragment
         outState.putBoolean(IS_LOADING_MORE, mIsLoadingMore);
     }
 
-    //onListItemClick
-    public void onListItemClick(ListView l, View v, int position, long id) {
-        mListener.onChannelSelected(mAdapter.getItem(position).id);
-    }
-
     //Listener methods
     //onAttach
+    @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        mListener = (ChannelsListFragmentCallbacks) activity;
+        mChannelListener = (ChannelsListFragmentCallbacks) activity;
     }
     //onDetach
     public void onDetach() {
         super.onDetach();
-        mListener = null;
+        mChannelListener = null;
+        ButterKnife.reset(this);
     }
 
     //Loader methods
@@ -97,24 +134,19 @@ public class ChannelsListFragment extends ListFragment
     }
     //onLoadFinished
     public void onLoadFinished(Loader<ChannelsLoader.LoaderResponse> loaderResponseLoader, ChannelsLoader.LoaderResponse loaderResponse) {
-        mAdapter.swapVideos(loaderResponse.channels);
+        mChannels = loaderResponse.channels;
+        mAdapter.swapChannels(mChannels);
         mIsLoadingMore = false;
     }
     //onLoaderReset
     public void onLoaderReset(Loader<ChannelsLoader.LoaderResponse> loaderResponseLoader) {
-        mAdapter.swapVideos(null);
+        mAdapter.swapChannels(null);
     }
 
-    //Scroll Listener methods
-    //onScrollStateChanged
-    public void onScrollStateChanged(AbsListView absListView, int i) {}
-    //onScroll
-    public void onScroll(AbsListView absListView, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-        int indexToLoadMoreData = firstVisibleItem + visibleItemCount + 5;
-        if(!mIsLoadingMore && indexToLoadMoreData >= totalItemCount && totalItemCount != 0){
-            mIsLoadingMore = true;
-            getLoaderManager().getLoader(0).forceLoad();
-        }
+
+    @Override
+    public void onItemClick(int position) {
+            mChannelListener.onChannelSelected(mChannels.get(position).id);
     }
 
     //Interface for event handling

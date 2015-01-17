@@ -8,11 +8,9 @@ import android.support.v4.content.Loader;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
 
 import com.vorticelabs.miveo.R;
 import com.vorticelabs.miveo.adapters.ChannelVideosListAdapter;
@@ -157,34 +155,12 @@ public class ChannelVideosListFragment extends Fragment implements
         mAdapter.swapVideos(null);
     }
 
-    //Scroll Listener methods
-    public void onScrollStateChanged(AbsListView absListView, int i) {}
-
-    public void onScroll(AbsListView absListView, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-        int indexToLoadMoreData = firstVisibleItem + visibleItemCount + 5;
-        if(!mIsLoadingMore && indexToLoadMoreData >= totalItemCount && totalItemCount != 0){
-            mIsLoadingMore = true;
-            getLoaderManager().getLoader(LOADER_ID).forceLoad();
-        }
-    }
-
     @Override
     public void onItemClick(int position) {
         if(mListener != null) {
             mListener.onChannelVideoClick(mChannelId, mVideos.get(position).id);
         }
     }
-
-    //Events
-    //onListItemClick: dispatch event to listener
-    //public void onListItemClick(ListView l, View v, int position, long id) {
-    //    super.onListItemClick(l, v, position, id);
-    //    if(mListener != null) {
-    //        mListener.onChannelVideoClick(mChannelId, getListAdapter().getItemId(position));
-    //    }
-    //}
-
-
 
     //Interface for Callbacks
     public interface ChannelVideosListFragmentCallbacks{

@@ -1,7 +1,5 @@
 package com.vorticelabs.miveo.adapters;
 
-import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,7 +10,6 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.vorticelabs.miveo.R;
-import com.vorticelabs.miveo.activities.VideoViewActivity;
 import com.vorticelabs.miveo.model.Video;
 
 import java.util.ArrayList;
@@ -88,7 +85,6 @@ public class ChannelVideosListAdapter extends RecyclerView.Adapter<ChannelVideos
             if(mListener != null)
                 mListener.onItemClick(getPosition());
         }
-
     }
 
     public void swapVideos(ArrayList<Video> videos) {
