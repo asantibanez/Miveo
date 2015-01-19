@@ -6,12 +6,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".activities.HomeActivity"
-        android:fitsSystemWindows="false">
+        android:fitsSystemWindows="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:fitsSystemWindows="false">
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/my_awesome_toolbar"

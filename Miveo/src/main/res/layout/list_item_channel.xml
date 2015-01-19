@@ -3,7 +3,7 @@
     xmlns:card_view="http://schemas.android.com/tools"
     android:id="@+id/card_view"
     android:layout_width="match_parent"
-    android:layout_height="240dp"
+    android:layout_height="152dp"
     android:layout_marginTop="8dp"
     android:layout_marginLeft="8dp"
     android:layout_marginRight="8dp"
@@ -14,7 +14,7 @@
     <ImageView
         android:id="@+id/thumbnail"
         android:layout_width="match_parent"
-        android:layout_height="186dp"
+        android:layout_height="100dp"
         android:scaleType="centerCrop"/>
 
     <LinearLayout
@@ -26,7 +26,7 @@
         android:paddingRight="16dp"
         android:paddingBottom="8dp"
         android:orientation="vertical"
-        android:background="@color/primary_text">
+        android:background="@color/dark_cards">
 
         <TextView
             android:id="@+id/title"
