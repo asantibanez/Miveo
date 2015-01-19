@@ -2,6 +2,7 @@ package com.vorticelabs.miveo.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
@@ -10,6 +11,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -75,6 +78,14 @@ public class VideoViewActivity extends ActionBarActivity
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setTitle("Video");
         //getSupportActionBar().setTitle(String.format("%s", mVideo.title));
+
+        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.LOLLIPOP){ // for lollipop
+            // your RemoteController class for lollipop is loaded here
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.setStatusBarColor(getResources().getColor(R.color.primary_dark));
+        }
 
         //Init loader
         getSupportLoaderManager().initLoader(0, null, this);

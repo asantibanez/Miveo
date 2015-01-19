@@ -31,6 +31,7 @@ public class NavDrawerFragment extends Fragment {
             R.drawable.ic_videos_verluego};
 
     String NAME = "Omar Tosca";
+    String INFO = "omartozk@gmail.com";
     int COVER = R.drawable.default_menu_backdrop;
     int PROFILE = R.drawable.unknown_user;
 
@@ -54,7 +55,7 @@ public class NavDrawerFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_nav_drawer, container, false);
 
         // Creating the Adapter of MyAdapter class(which we are going to see in a bit)
-        mAdapter = new NavDrawerAdapter(TITLES, ICONS, COVER,PROFILE, NAME);
+        mAdapter = new NavDrawerAdapter(TITLES, ICONS, COVER,PROFILE, NAME, INFO, getActivity());
 
         return v;
     }

@@ -6,8 +6,7 @@
     android:paddingStart="16dp"
     android:paddingEnd="16dp"
     android:minHeight="?android:attr/listPreferredItemHeight"
-    android:gravity="center_vertical"
-    android:clickable="false">
+    android:gravity="center_vertical">
 
     <TextView
         android:id="@+id/option_title"
@@ -16,6 +15,6 @@
         android:textColor="@color/icons"
         android:gravity="center_vertical"
         android:layout_alignParentBottom="true"
-        android:textSize="14sp"/>
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"/>
 
 </RelativeLayout>

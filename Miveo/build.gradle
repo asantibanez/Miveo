@@ -9,7 +9,7 @@ android {
         minSdkVersion 19
         targetSdkVersion 21
         versionCode 1
-        versionName "0.4"
+        versionName "0.5.3"
     }
 
     buildTypes {
@@ -43,4 +43,7 @@ dependencies {
 
     //Tab Strip
     compile 'com.jpardogo.materialtabstrip:library:1.0.7'
+
+    //Circle Image View
+    compile 'de.hdodenhof:circleimageview:1.2.1'
 }

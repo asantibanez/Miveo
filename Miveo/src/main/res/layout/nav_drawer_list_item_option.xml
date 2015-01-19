@@ -2,8 +2,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="48dp"
-    android:background="?android:attr/activatedBackgroundIndicator"
+    android:background="?android:attr/selectableItemBackground"
     android:gravity="center_vertical"
+    android:listSelector="@color/primary_light"
     android:minHeight="?android:attr/listPreferredItemHeight">
 
     <ImageView
@@ -19,9 +20,7 @@
         android:layout_height="48dp"
         android:textColor="@color/icons"
         android:layout_marginStart="72dp"
-        android:textAppearance="@android:style/TextAppearance.Material.Medium"
-        android:textSize="14sp"
-        android:textStyle="bold"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:gravity="center_vertical" />
 
 </RelativeLayout>
