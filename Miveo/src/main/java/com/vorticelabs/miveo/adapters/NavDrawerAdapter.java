@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.vorticelabs.miveo.R;
 
 public class NavDrawerAdapter extends RecyclerView.Adapter<NavDrawerAdapter.ViewHolder> {
+
     public final static String TAG = NavDrawerAdapter.class.getSimpleName();
 
     //Available item types
@@ -39,7 +40,7 @@ public class NavDrawerAdapter extends RecyclerView.Adapter<NavDrawerAdapter.View
     //Listener for item click events
     private NavDrawerListener mNavDrawerListener;
 
-    public void setmNavDrawerListener(NavDrawerListener listener){
+    public void setNavDrawerListener(NavDrawerListener listener){
         mNavDrawerListener = listener;
     }
 

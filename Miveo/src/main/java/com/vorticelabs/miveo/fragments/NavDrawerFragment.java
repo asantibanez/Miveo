@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,11 +14,12 @@ import com.vorticelabs.miveo.R;
 import com.vorticelabs.miveo.adapters.NavDrawerAdapter;
 
 public class NavDrawerFragment extends Fragment implements NavDrawerAdapter.NavDrawerListener{
+
     public final static String TAG = NavDrawerFragment.class.getSimpleName();
 
     //Variables
     RecyclerView mRecyclerView;
-    RecyclerView.Adapter mAdapter;
+    NavDrawerAdapter mAdapter;
     RecyclerView.LayoutManager mLayoutManager;
 
 //    String optionsArray[] = getActivity().getResources().getStringArray(R.array.nav_drawer_options);
@@ -56,7 +58,7 @@ public class NavDrawerFragment extends Fragment implements NavDrawerAdapter.NavD
 
         // Creating the Adapter of MyAdapter class(which we are going to see in a bit)
         mAdapter = new NavDrawerAdapter(TITLES, ICONS, SUBTITLES, COVER,PROFILE, NAME, INFO, getActivity());
-        mAdapter.setmNavDrawerListener(this);
+        mAdapter.setNavDrawerListener(this);
 
         return v;
     }
@@ -95,9 +97,8 @@ public class NavDrawerFragment extends Fragment implements NavDrawerAdapter.NavD
     }
 
     public void onItemClick(int position) {
-        if(mNavDrawerListener != null) {
+        if(mNavDrawerListener != null)
             mNavDrawerListener.onNavDrawerOptionSelected(position);
-        }
     }
 
     //Interface for interactions. Activity must implement methods.
