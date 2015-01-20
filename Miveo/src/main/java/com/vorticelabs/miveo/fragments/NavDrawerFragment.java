@@ -8,12 +8,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
 import com.vorticelabs.miveo.R;
 import com.vorticelabs.miveo.adapters.NavDrawerAdapter;
 
-public class NavDrawerFragment extends Fragment {
+public class NavDrawerFragment extends Fragment implements NavDrawerAdapter.NavDrawerListener{
     public final static String TAG = NavDrawerFragment.class.getSimpleName();
 
     //Variables
@@ -25,6 +24,7 @@ public class NavDrawerFragment extends Fragment {
 //    ArrayList<String> TITLES = new ArrayList<>(Arrays.asList(optionsArray));
 
     String TITLES[] = {"Staff Picks", "Canales Destacados", "Favoritos", "Ver Luego"};
+    String SUBTITLES[] = {"Opciones","Ayuda"};
     int ICONS[] = {R.drawable.ic_canales_destacados,
             R.drawable.ic_videos_destacados,
             R.drawable.ic_videos_favoritos,
@@ -36,7 +36,7 @@ public class NavDrawerFragment extends Fragment {
     int PROFILE = R.drawable.unknown_user;
 
     //Listener
-    private NavDrawerFragmentCallbacks mListener;
+    private NavDrawerFragmentCallbacks mNavDrawerListener;
 
     //Factory method
     public static NavDrawerFragment newInstance() {
@@ -55,7 +55,8 @@ public class NavDrawerFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_nav_drawer, container, false);
 
         // Creating the Adapter of MyAdapter class(which we are going to see in a bit)
-        mAdapter = new NavDrawerAdapter(TITLES, ICONS, COVER,PROFILE, NAME, INFO, getActivity());
+        mAdapter = new NavDrawerAdapter(TITLES, ICONS, SUBTITLES, COVER,PROFILE, NAME, INFO, getActivity());
+        mAdapter.setmNavDrawerListener(this);
 
         return v;
     }
@@ -81,7 +82,7 @@ public class NavDrawerFragment extends Fragment {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         try {
-            mListener = (NavDrawerFragmentCallbacks) activity;
+            mNavDrawerListener = (NavDrawerFragmentCallbacks) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
                     + " must implement OnFragmentInteractionListener");
@@ -90,12 +91,12 @@ public class NavDrawerFragment extends Fragment {
     //onDetach: throw away listener
     public void onDetach() {
         super.onDetach();
-        mListener = null;
+        mNavDrawerListener = null;
     }
 
-    public void onListItemClick(ListView listView, View vie, int position, long id) {
-        if(mListener != null) {
-            mListener.onNavDrawerOptionSelected(position);
+    public void onItemClick(int position) {
+        if(mNavDrawerListener != null) {
+            mNavDrawerListener.onNavDrawerOptionSelected(position);
         }
     }
 

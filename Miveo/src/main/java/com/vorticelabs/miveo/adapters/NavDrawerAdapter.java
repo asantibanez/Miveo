@@ -17,26 +17,41 @@ public class NavDrawerAdapter extends RecyclerView.Adapter<NavDrawerAdapter.View
     //Available item types
     private static final int HEADER_VIEW_TYPE = 0;
     private static final int OPTION_VIEW_TYPE = 1;
+    private static final int SUBOPTION_VIEW_TYPE = 2;
 
     //Available view resources
     private static final int HEADER_VIEW_RESOURCE_ID = R.layout.nav_drawer_header;
     private static final int OPTION_VIEW_RESOURCE_ID = R.layout.nav_drawer_list_item_option;
+    private static final int SUBOPTION_VIEW_RESOURCE_ID = R.layout.nav_drawer_list_item_sub_option;
 
     //Variables
-    private String mTitles[]; // String Array to store the passed titles Value from MainActivity.java
-    private int mIcons[];       // Int Array to store the passed icons resource value from MainActivity.java
+    private String mTitles[];
+    private int mIcons[];
+    private String mSubtitles[];
 
-    private int cover;        //String Resource for header View Name
-    private int profile;        //int Resource for header view profile picture
+    private int cover;
+    private int profile;
     private String name;
-    private String info; //String Resource for header view email
+    private String info;
 
     Context context;
 
+    //Listener for item click events
+    private NavDrawerListener mNavDrawerListener;
+
+    public void setmNavDrawerListener(NavDrawerListener listener){
+        mNavDrawerListener = listener;
+    }
+
+    public interface NavDrawerListener {
+        public void onItemClick(int position);
+    }
+
     //Constructor
-    public NavDrawerAdapter(String Titles[], int Icons[], int Cover, int Profile, String Name, String Info, Context passedContext) {
+    public NavDrawerAdapter(String Titles[], int Icons[], String Subtitles[], int Cover, int Profile, String Name, String Info, Context passedContext) {
         mTitles = Titles;
         mIcons = Icons;
+        mSubtitles = Subtitles;
         cover = Cover;
         profile = Profile;
         name = Name;
@@ -58,30 +73,39 @@ public class NavDrawerAdapter extends RecyclerView.Adapter<NavDrawerAdapter.View
         TextView info;
         Context contxt;
 
-        public ViewHolder(View itemView, int ViewType, Context c) {                 // Creating ViewHolder Constructor with View and viewType As a parameter
+        private NavDrawerListener mNavDrawerListener;
+
+        // Creating ViewHolder Constructor with View and viewType As a parameter
+        public ViewHolder(View itemView, int ViewType, Context c, NavDrawerListener mlistener) {
             super(itemView);
 
+            mNavDrawerListener = mlistener;
             contxt = c;
 
             itemView.setClickable(true);
             itemView.setOnClickListener(this);
-            // Here we set the appropriate view in accordance with the the view type as passed when the holder object is created
 
+            // Here we set the appropriate view in accordance with the the view type as passed when the holder object is created
             if (ViewType == HEADER_VIEW_TYPE) {
                 cover = (ImageView) itemView.findViewById(R.id.userCover);
                 profile = (ImageView) itemView.findViewById(R.id.userPhoto);
                 name = (TextView) itemView.findViewById(R.id.userName);
                 info = (TextView) itemView.findViewById(R.id.userInfo);
                 holderId = 0; // Setting holder id = 0 as the object being populated are of type header view
-            } else {
+            } else if (ViewType == OPTION_VIEW_TYPE){
                 icon = (ImageView) itemView.findViewById(R.id.option_icon);
                 title = (TextView) itemView.findViewById(R.id.option_title);
                 holderId = 1;
+            } else {
+                title = (TextView) itemView.findViewById(R.id.option_subtitle);
+                holderId = 2;
             }
         }
+
         @Override
         public void onClick(View v) {
             Log.d(TAG, "Element " + getPosition() + " clicked.");
+            mNavDrawerListener.onItemClick(getPosition());
         }
     }
 
@@ -95,14 +119,17 @@ public class NavDrawerAdapter extends RecyclerView.Adapter<NavDrawerAdapter.View
 
         if (viewType == OPTION_VIEW_TYPE) {
             View v = LayoutInflater.from(parent.getContext()).inflate(OPTION_VIEW_RESOURCE_ID, parent, false); //Inflating the layout
-            ViewHolder vhItem = new ViewHolder(v,viewType, context); //Creating ViewHolder and passing the object of type view
+            ViewHolder vhItem = new ViewHolder(v,viewType, context, mNavDrawerListener); //Creating ViewHolder and passing the object of type view
             return vhItem; // Returning the created object
             //inflate your layout and pass it to view holder
-
         } else if (viewType == HEADER_VIEW_TYPE) {
             View v = LayoutInflater.from(parent.getContext()).inflate(HEADER_VIEW_RESOURCE_ID,parent,false); //Inflating the layout
-            ViewHolder vhHeader = new ViewHolder(v,viewType, context); //Creating ViewHolder and passing the object of type view
+            ViewHolder vhHeader = new ViewHolder(v,viewType, context, mNavDrawerListener); //Creating ViewHolder and passing the object of type view
             return vhHeader; //returning the object created
+        } else if (viewType == SUBOPTION_VIEW_TYPE){
+            View v = LayoutInflater.from(parent.getContext()).inflate(SUBOPTION_VIEW_RESOURCE_ID, parent, false);
+            ViewHolder vhSubheader = new ViewHolder(v,viewType, context, mNavDrawerListener);
+            return vhSubheader;
         }
         return null;
     }
@@ -116,11 +143,11 @@ public class NavDrawerAdapter extends RecyclerView.Adapter<NavDrawerAdapter.View
             // as the list view is going to be called after the header view so we decrement the
             // position by 1 and pass it to the holder while setting the text and image
             //Title
-            holder.title.setText(mTitles[position -1]);
+            holder.title.setText(mTitles[position - 1]);
             //Icon
-            holder.icon.setImageResource(mIcons[position -1]);
+            holder.icon.setImageResource(mIcons[position - 1]);
         }
-        else{
+        else if (holder.holderId == 0){
             //Cover
             holder.cover.setImageResource(R.drawable.default_menu_backdrop);
             //User photo
@@ -130,13 +157,17 @@ public class NavDrawerAdapter extends RecyclerView.Adapter<NavDrawerAdapter.View
             //User info
             holder.info.setText("omartozk@gmail.com");
         }
+        else if (holder.holderId == 2){
+            //Subtitle
+            holder.title.setText(mSubtitles[position - mTitles.length - 1]);
+        }
     }
 
     // This method returns the number of items present in the list
     @Override
     public int getItemCount() {
         // the number of items in the list will be +1 the titles including the header view.
-        return mTitles.length+1;
+        return mTitles.length + mSubtitles.length + 1;
     }
 
 
@@ -145,12 +176,17 @@ public class NavDrawerAdapter extends RecyclerView.Adapter<NavDrawerAdapter.View
     public int getItemViewType(int position) {
         if (isPositionHeader(position))
             return HEADER_VIEW_TYPE;
-
-        return OPTION_VIEW_TYPE;
+        else if (isPositionList(position))
+            return OPTION_VIEW_TYPE;
+        else
+            return SUBOPTION_VIEW_TYPE;
     }
 
     private boolean isPositionHeader(int position) {
         return position == 0;
     }
 
+    private boolean isPositionList(int position) {
+        return position > 0 && position < (mTitles.length + 1) ;
+    }
 }
