@@ -23,6 +23,7 @@ public class ChannelVideosListAdapter extends RecyclerView.Adapter<ChannelVideos
 
     //Listener for item click events
     private ChannelVideosAdapterListener mListener;
+
     public void setChannelVideosAdapterListener(ChannelVideosAdapterListener listener) {
         mListener = listener;
     }
@@ -92,66 +93,4 @@ public class ChannelVideosListAdapter extends RecyclerView.Adapter<ChannelVideos
         notifyDataSetChanged();
         Log.d(TAG, "Videos swapped!");
     }
-
-    //Old code
-
-//    private ArrayList<Video> mVideos;
-//    private LayoutInflater mInflater;
-//
-//    public ChannelVideosListAdapter(Context context){
-//        super();
-//        mInflater = LayoutInflater.from(context);
-//    }
-//
-//
-//    public int getCount() {
-//        if(mVideos != null)
-//            return mVideos.size();
-//        else
-//            return 0;
-//    }
-//
-//    public Video getItem(int i) {
-//        if(mVideos != null && mVideos.size() > 0)
-//            return mVideos.get(i);
-//
-//        return null;
-//    }
-//
-//    public long getItemId(int i) {
-//        if(mVideos != null && mVideos.size() > 0)
-//            return mVideos.get(i).id;
-//
-//        return 0;
-//    }
-//
-//    public View getView(int i, View convertView, ViewGroup viewGroup) {
-//        Video video = getItem(i);
-//
-//        ViewHolder viewHolder;
-//        if(convertView == null) {
-//            convertView = mInflater.inflate(R.layout.list_item_channel_video, viewGroup, false);
-//
-//            viewHolder = new ViewHolder();
-//            viewHolder.thumbnail = (ImageView) convertView.findViewById(R.id.thumbnail);
-//            viewHolder.title = (TextView) convertView.findViewById(R.id.title);
-//            viewHolder.subTitle = (TextView) convertView.findViewById(R.id.sub_title);
-//            convertView.setTag(viewHolder);
-//        }else{
-//            viewHolder = (ViewHolder) convertView.getTag();
-//        }
-//
-//        //Set data
-//        Picasso.with(mInflater.getContext()).load(video.thumbnailUrl).into(viewHolder.thumbnail);
-//        viewHolder.title.setText(video.title);
-//        viewHolder.subTitle.setText("por " + video.uploadedBy);
-//
-//        return convertView;
-//    }
-//
-//    static class ViewHolder{
-//        ImageView thumbnail;
-//        TextView title;
-//        TextView subTitle;
-//    }
 }

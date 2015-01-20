@@ -17,6 +17,7 @@ import java.util.ArrayList;
 public class ChannelsListAdapter extends RecyclerView.Adapter<ChannelsListAdapter.ViewHolder> {
     public static final String TAG = ChannelsListAdapter.class.getSimpleName();
 
+    //Variables
     private ArrayList<Channel> mChannels;
     private int itemLayout;
 
@@ -31,6 +32,7 @@ public class ChannelsListAdapter extends RecyclerView.Adapter<ChannelsListAdapte
         public void onItemClick(int position);
     }
 
+    //Constructor
     public ChannelsListAdapter(ArrayList<Channel> mChannels, int itemLayout) {
         this.itemLayout = itemLayout;
         this.mChannels = mChannels;
@@ -51,8 +53,8 @@ public class ChannelsListAdapter extends RecyclerView.Adapter<ChannelsListAdapte
         else
             viewHolder.thumbnail.setImageBitmap(null);
 
-        viewHolder.title.setText(channel.name);
-        viewHolder.subtitle.setText(channel.totalSubscribers + " suscriptores");
+            viewHolder.title.setText(channel.name);
+            viewHolder.subtitle.setText(channel.totalSubscribers + " suscriptores");
     }
 
     @Override

@@ -2,19 +2,20 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="48dp"
-    android:background="?android:attr/activatedBackgroundIndicator"
+    android:background="?android:attr/selectableItemBackground"
     android:paddingStart="16dp"
     android:paddingEnd="16dp"
     android:minHeight="?android:attr/listPreferredItemHeight"
+    android:listSelector="@color/primary_light"
     android:gravity="center_vertical">
 
     <TextView
-        android:id="@+id/option_title"
+        android:id="@+id/option_subtitle"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:textColor="@color/icons"
         android:gravity="center_vertical"
         android:layout_alignParentBottom="true"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"/>
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
 
 </RelativeLayout>
