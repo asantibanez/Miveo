@@ -132,6 +132,11 @@ public class HomeActivity extends ActionBarActivity
         if (mDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
+
+        if(item.getItemId() == R.id.action_login) {
+            startActivity(new Intent(this, LoginActivity.class));
+        }
+
         return super.onOptionsItemSelected(item);
     }
 
