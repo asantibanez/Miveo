@@ -89,7 +89,6 @@ public class HomeActivity extends ActionBarActivity
         if(savedInstanceState == null) {
             mainFragment = ChannelVideosListFragment.newInstance(Constants.VIMEO_STAFF_PICKS_CHANNEL_ID);
             drawerFragment = NavDrawerFragment.newInstance();
-
             getSupportFragmentManager().beginTransaction()
                     .replace(mainContainer.getId(), mainFragment)
                     .replace(drawerContainer.getId(), drawerFragment)

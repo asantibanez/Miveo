@@ -110,7 +110,7 @@ public class NavDrawerAdapter extends RecyclerView.Adapter<NavDrawerAdapter.View
         }
     }
 
-        //Below first we ovverride the method onCreateViewHolder which is called when the ViewHolder is
+    //Below first we ovverride the method onCreateViewHolder which is called when the ViewHolder is
         //Created, In this method we inflate the item_row.xml layout if the viewType is Type_ITEM or else we inflate header.xml
         // if the viewType is TYPE_HEADER
         // and pass it to the view holder

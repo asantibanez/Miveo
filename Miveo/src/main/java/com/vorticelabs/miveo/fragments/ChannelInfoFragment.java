@@ -101,8 +101,8 @@ public class ChannelInfoFragment extends Fragment
                 Picasso.with(getActivity()).load(mChannel.logoUrl).into(thumbnail);
 
             description.setText(mChannel.description);
-            videosCount.setText("Videos: " + String.format("%d", mChannel.totalVideos));
-            subscribersCount.setText("Suscriptores: " + String.format("%d", mChannel.totalSubscribers));
+            videosCount.setText(String.format("%d", mChannel.totalVideos) + " videos");
+            subscribersCount.setText(String.format("%d", mChannel.totalSubscribers) + " suscriptores");
         }
     }
 

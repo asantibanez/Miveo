@@ -33,9 +33,9 @@
     </string-array>
 
     <!-- Channel View strings -->
-    <string name="tab_title_main">Principal</string>
+    <string name="tab_title_main">Info</string>
     <string name="tab_title_videos">Videos</string>
     <string name="title_activity_video_playback">Ver Video</string>
-    <string name="title_activity_video_view">VideoViewActivity</string>
+    <string name="title_activity_video_view">Reproductor</string>
 
 </resources>

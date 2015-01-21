@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 import com.astuetz.PagerSlidingTabStrip;
 import com.vorticelabs.miveo.R;
@@ -32,6 +33,7 @@ public class ChannelViewActivity extends ActionBarActivity
     private int mId;
     private ChannelPagerAdapter mPagerAdapter;
     private Channel mChannel;
+    TextView mTitle;
 
     //Controls
     private ViewPager mPager;
@@ -69,7 +71,8 @@ public class ChannelViewActivity extends ActionBarActivity
         Toolbar toolbar = (Toolbar)findViewById(R.id.channel_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Canal");
+        getSupportActionBar().setTitle("");
+
         //getSupportActionBar().setTitle(String.format("%s", mVideo.title));
 
         if (Build.VERSION.SDK_INT == Build.VERSION_CODES.LOLLIPOP){ // for lollipop

@@ -30,10 +30,12 @@ public class VideoViewActivity extends ActionBarActivity
     public static final String CHANNEL_ID = "channel_id";
     public static final String VIDEO_ID = "video_id";
 
+    //    private Drawable mActionBarBackgroundDrawable;
+//    private int mLastDampedScroll;
+
     //Variables
     private int mChannelId;
     private long mVideoId;
-    private Video mVideo;
 
     //Controls
     private ImageView mThumbnail;
@@ -72,12 +74,18 @@ public class VideoViewActivity extends ActionBarActivity
         }
 
         //ActionBar Up Navigation
-        Toolbar toolbar = (Toolbar)findViewById(R.id.video_view_toolbar);
-        setSupportActionBar(toolbar);
+        Toolbar mToolbar = (Toolbar) findViewById(R.id.video_view_toolbar);
+//        mActionBarBackgroundDrawable = mToolbar.getBackground();
+        setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setTitle("Video");
+        getSupportActionBar().setTitle("");
         //getSupportActionBar().setTitle(String.format("%s", mVideo.title));
+
+//        ObservableScrollable scrollView = (ObservableScrollable) findViewById(R.id.scrollview);
+//        scrollView.setOnScrollChangedCallback(this);
+//
+//        onScroll(-1, 0);
 
         if (Build.VERSION.SDK_INT == Build.VERSION_CODES.LOLLIPOP){ // for lollipop
             // your RemoteController class for lollipop is loaded here
@@ -90,6 +98,31 @@ public class VideoViewActivity extends ActionBarActivity
         //Init loader
         getSupportLoaderManager().initLoader(0, null, this);
     }
+
+//    @Override
+//    public void onScroll(int l, int scrollPosition) {
+//        int headerHeight = mThumbnail.getHeight() - mToolbar.getHeight();
+//        float ratio = 0;
+//        if (scrollPosition > 0 && headerHeight > 0)
+//            ratio = (float) Math.min(Math.max(scrollPosition, 0), headerHeight) / headerHeight;
+//
+//        updateActionBarTransparency(ratio);
+//        updateParallaxEffect(scrollPosition);
+//    }
+//
+//    private void updateActionBarTransparency(float scrollRatio) {
+//        int newAlpha = (int) (scrollRatio * 255);
+//        mActionBarBackgroundDrawable.setAlpha(newAlpha);
+//        mToolbar.setBackground(mActionBarBackgroundDrawable);
+//    }
+//    private void updateParallaxEffect(int scrollPosition) {
+//        float damping = 0.5f;
+//        int dampedScroll = (int) (scrollPosition * damping);
+//        int offset = mLastDampedScroll - dampedScroll;
+//        mThumbnail.offsetTopAndBottom(-offset);
+//
+//        mLastDampedScroll = dampedScroll;
+//    }
 
     //onSaveInstanceState
     protected void onSaveInstanceState(Bundle outState) {
