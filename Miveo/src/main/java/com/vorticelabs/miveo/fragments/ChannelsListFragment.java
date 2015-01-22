@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.vorticelabs.miveo.R;
 import com.vorticelabs.miveo.adapters.ChannelsListAdapter;
@@ -39,6 +40,8 @@ public class ChannelsListFragment extends Fragment implements
     private ChannelsListAdapter mAdapter;
     private ArrayList<Channel> mChannels;
     private LinearLayoutManager mLinearLayoutManager;
+
+    private ProgressBar mProgressBar;
 
     //Controls
     @InjectView(R.id.channel_recyclerview) public RecyclerView mRecyclerView;
@@ -73,6 +76,9 @@ public class ChannelsListFragment extends Fragment implements
         if(savedInstanceState != null){
             mIsLoadingMore = savedInstanceState.getBoolean(IS_LOADING_MORE);
         }
+
+        //Progress Bar
+        mProgressBar = (ProgressBar) fragmentView.findViewById(R.id.channels_progressBar);
 
         //Init loader
         getLoaderManager().initLoader(LOADER_ID, null, this);
@@ -128,25 +134,24 @@ public class ChannelsListFragment extends Fragment implements
     }
 
     //Loader methods
-    //onCreateLoader
     public Loader<ChannelsLoader.LoaderResponse> onCreateLoader(int i, Bundle bundle) {
+        mProgressBar.setVisibility(View.VISIBLE);
         return new ChannelsLoader(getActivity());
     }
-    //onLoadFinished
     public void onLoadFinished(Loader<ChannelsLoader.LoaderResponse> loaderResponseLoader, ChannelsLoader.LoaderResponse loaderResponse) {
         mChannels = loaderResponse.channels;
         mAdapter.swapChannels(mChannels);
+        mProgressBar.setVisibility(View.GONE);
         mIsLoadingMore = false;
     }
-    //onLoaderReset
     public void onLoaderReset(Loader<ChannelsLoader.LoaderResponse> loaderResponseLoader) {
+        mProgressBar.setVisibility(View.VISIBLE);
         mAdapter.swapChannels(null);
     }
 
-
     @Override
     public void onItemClick(int position) {
-            mChannelListener.onChannelSelected(mChannels.get(position).id);
+        mChannelListener.onChannelSelected(mChannels.get(position).id);
     }
 
     //Interface for event handling

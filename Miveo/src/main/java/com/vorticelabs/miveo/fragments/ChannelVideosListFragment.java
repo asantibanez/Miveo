@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.vorticelabs.miveo.R;
 import com.vorticelabs.miveo.adapters.ChannelVideosListAdapter;
@@ -40,6 +41,8 @@ public class ChannelVideosListFragment extends Fragment implements
     private ChannelVideosListAdapter mAdapter;
     private ArrayList<Video> mVideos;
     private LinearLayoutManager mLinearLayoutManager;
+
+    private ProgressBar mProgressBar;
 
     //Controls
     @InjectView(R.id.my_recycler_view) public RecyclerView mRecyclerView;
@@ -79,6 +82,9 @@ public class ChannelVideosListFragment extends Fragment implements
             mChannelId = getArguments().getInt(CHANNEL_ID);
             mIsLoadingMore = false;
         }
+
+        //Progress Bar
+        mProgressBar = (ProgressBar) fragmentView.findViewById(R.id.videos_progressBar);
 
         //Init loader
         getLoaderManager().initLoader(LOADER_ID, null, this);
@@ -142,16 +148,17 @@ public class ChannelVideosListFragment extends Fragment implements
 
     //Loader methods
     public Loader<ChannelVideosLoader.LoaderResponse> onCreateLoader(int i, Bundle bundle) {
+        mProgressBar.setVisibility(View.VISIBLE);
         return new ChannelVideosLoader(getActivity(), mChannelId);
     }
-
     public void onLoadFinished(Loader<ChannelVideosLoader.LoaderResponse> loaderResponseLoader, ChannelVideosLoader.LoaderResponse loaderResponse) {
+        mProgressBar.setVisibility(View.GONE);
         mVideos = loaderResponse.videos;
         mAdapter.swapVideos(mVideos);
         mIsLoadingMore = false;
     }
-
     public void onLoaderReset(Loader<ChannelVideosLoader.LoaderResponse> loaderResponseLoader) {
+        mProgressBar.setVisibility(View.VISIBLE);
         mAdapter.swapVideos(null);
     }
 

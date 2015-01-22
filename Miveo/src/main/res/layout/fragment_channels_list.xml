@@ -3,6 +3,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:padding="8dp"
+        android:weightSum="1">
+
+        <ProgressBar
+            android:id="@+id/channels_progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:layout_weight="0.1" />
+
+    </LinearLayout>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/channel_recyclerview"
         android:scrollbars="vertical"

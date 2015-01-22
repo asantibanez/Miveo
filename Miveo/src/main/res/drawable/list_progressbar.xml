@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Progress -->
+    <item android:id="@android:id/progress">
+        <!-- Rotation of the progress to start at the top-->
+            <shape
+                android:shape="ring"
+                android:useLevel="true">
+                <solid
+                    android:color="@color/accent"/>
+            </shape>
+    </item>
+
+</layer-list>
