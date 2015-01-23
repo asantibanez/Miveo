@@ -1,14 +1,16 @@
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/fragment_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-<android.support.v7.widget.Toolbar
-android:id="@+id/video_playback_toolbar"
-android:layout_height="wrap_content"
-android:layout_width="match_parent"
-android:minHeight="?attr/actionBarSize"
-android:background="@color/primary"/>
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/video_playback_toolbar"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:minHeight="?attr/actionBarSize"
+        android:background="@color/primary"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:elevation="3dp"/>
 
 </FrameLayout>

@@ -103,6 +103,7 @@ public class ChannelInfoFragment extends Fragment
             description.setText(mChannel.description);
             videosCount.setText(String.format("%d", mChannel.totalVideos) + " videos");
             subscribersCount.setText(String.format("%d", mChannel.totalSubscribers) + " suscriptores");
+            getActivity().setTitle(mChannel.name);
         }
     }
 

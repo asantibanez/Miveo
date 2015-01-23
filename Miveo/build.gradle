@@ -48,5 +48,5 @@ dependencies {
     compile 'de.hdodenhof:circleimageview:1.2.1'
 
     //FadingActionBar
-    //compile 'com.github.manuelpeinado.fadingactionbar:fadingactionbar:3.1.2'
+    compile 'com.github.manuelpeinado.fadingactionbar:fadingactionbar:3.1.2'
 }

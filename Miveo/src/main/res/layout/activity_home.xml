@@ -19,6 +19,7 @@
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:minHeight="?attr/actionBarSize"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                 android:elevation="3dp"
                 android:background="@color/primary"/>
 

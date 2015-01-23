@@ -10,6 +10,8 @@
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:minHeight="?attr/actionBarSize"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:elevation="3dp"
         android:background="@color/primary"/>
 
     <com.astuetz.PagerSlidingTabStrip
@@ -18,7 +20,10 @@
         android:layout_height="48dp"
         android:background="@color/primary"
         android:textColor="@color/icons"
+        android:elevation="3dp"
         app:pstsUnderlineColor="@color/accent"
+        app:pstsTextStyle="normal"
+        app:pstsTextSelectedStyle="bold"
         app:pstsIndicatorColor="@color/accent"/>
 
     <android.support.v4.view.ViewPager
