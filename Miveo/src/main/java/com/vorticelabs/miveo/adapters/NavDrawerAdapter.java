@@ -152,11 +152,11 @@ public class NavDrawerAdapter extends RecyclerView.Adapter<NavDrawerAdapter.View
             //Cover
             holder.cover.setImageResource(R.drawable.default_menu_backdrop);
             //User photo
-            holder.profile.setImageResource(R.drawable.user);
+            holder.profile.setImageResource(R.drawable.unknown_user);
             //User name
             holder.name.setText(R.string.username);
             //User info
-            holder.info.setText("omartozk@gmail.com");
+            holder.info.setText("en Vimeo");
         }
         else if (holder.holderId == 2){
             //Subtitle

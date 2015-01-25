@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/personalizedArea"
     android:layout_width="match_parent"
     android:layout_height="208dp"
-    android:paddingBottom="8dp"
-    android:foreground="?android:attr/selectableItemBackground">
+    android:paddingBottom="8dp">
 
     <ImageView
         android:id="@+id/userCover"
@@ -19,16 +18,15 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:orientation="vertical"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:background="?android:attr/selectableItemBackground">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/userPhoto"
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            app:border_width="2dp"
-            app:border_color="@color/divider"/>
+            android:layout_marginRight="16dp"/>
 
         <LinearLayout
             android:id="@+id/name_area"
@@ -37,7 +35,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center_vertical"
-            android:background="?android:attr/selectableItemBackground">
+            >
 
             <TextView
                 android:id="@+id/userName"

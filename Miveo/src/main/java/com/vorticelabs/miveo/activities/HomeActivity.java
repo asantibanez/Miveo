@@ -102,6 +102,8 @@ public class HomeActivity extends ActionBarActivity
 
     public void onNavDrawerOptionSelected(int position) {
         switch (position) {
+            case 0:
+                startActivity(new Intent(this, LoginActivity.class));
             case 1:
                 mainFragment = ChannelVideosListFragment.newInstance(Constants.VIMEO_STAFF_PICKS_CHANNEL_ID);
                 getSupportActionBar().setTitle(R.string.title_section1);
@@ -131,10 +133,10 @@ public class HomeActivity extends ActionBarActivity
         if (mDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
-
-        if(item.getItemId() == R.id.action_login) {
-            startActivity(new Intent(this, LoginActivity.class));
-        }
+//
+//        if(item.getItemId() == R.id.action_login) {
+//            startActivity(new Intent(this, LoginActivity.class));
+//        }
 
         return super.onOptionsItemSelected(item);
     }

@@ -20,8 +20,9 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="canal">Canal</string>
     <string name="loading">Cargando...</string>
+    <string name="action_search">Buscar</string>
 
-    <string name="username">Omar Tosca</string>
+    <string name="username">Iniciar Sesión</string>
 
     <!-- Nav Drawer Options -->
     <string-array name="nav_drawer_options">

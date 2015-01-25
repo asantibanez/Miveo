@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,14 +25,14 @@ public class NavDrawerFragment extends Fragment implements NavDrawerAdapter.NavD
 //    ArrayList<String> TITLES = new ArrayList<>(Arrays.asList(optionsArray));
 
     String TITLES[] = {"Staff Picks", "Canales Destacados", "Favoritos", "Ver Luego"};
-    String SUBTITLES[] = {"Opciones","Ayuda"};
+    String SUBTITLES[] = {"Opciones","Acerca de"};
     int ICONS[] = {R.drawable.ic_canales_destacados,
             R.drawable.ic_videos_destacados,
             R.drawable.ic_videos_favoritos,
             R.drawable.ic_videos_verluego};
 
-    String NAME = "Omar Tosca";
-    String INFO = "omartozk@gmail.com";
+    String NAME = "Iniciar sesión";
+    String INFO = "";
     int COVER = R.drawable.default_menu_backdrop;
     int PROFILE = R.drawable.unknown_user;
 
