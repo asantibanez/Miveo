@@ -1,10 +1,12 @@
 package com.andressantibanez.vimofit.model;
 
+import com.andressantibanez.vimofit.model.catalogs.Portraits;
 import com.google.gson.annotations.SerializedName;
 
 public class Owner {
     @SerializedName("display_name") public String displayName;
     public int id;
+    public Portraits portraits;
     /*
     -- Example data --
     "display_name": "Cirkus",

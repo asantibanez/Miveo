@@ -1,5 +1,6 @@
 package com.andressantibanez.vimofit.model;
 
+import com.andressantibanez.vimofit.model.catalogs.Tags;
 import com.andressantibanez.vimofit.model.catalogs.Thumbnails;
 
 public class Video {
@@ -15,6 +16,8 @@ public class Video {
     public int number_of_plays;
     public int number_of_likes;
     public int number_of_comments;
+
     public Owner owner;
     public Thumbnails thumbnails;
+    public Tags tags;
 }

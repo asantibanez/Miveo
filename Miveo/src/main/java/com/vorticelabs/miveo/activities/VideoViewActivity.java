@@ -8,6 +8,7 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -174,6 +175,20 @@ public class VideoViewActivity extends ActionBarActivity
         mTitle.setText(video.title);
         mDescription.setText(video.description);
         mUploadInfo.setText(video.uploadedBy);
+
+        //How to get info :D
+        Log.d(TAG, "Owner: " + video.owner.displayName);
+        Log.d(TAG, "Tags: " + video.tags.size());
+        for (int i = 0; i < video.tags.size(); i++) {
+            Log.d(TAG, "Tag: " + video.tags.get(i).name);
+        }
+
+        Log.d(TAG, "Owner Portraits: " + video.owner.portraits.size());
+        for (int i = 0; i < video.owner.portraits.size(); i++) {
+            Log.d(TAG, "Portrait: " + video.owner.portraits.get(i).url);
+        }
+
+
     }
 
     public void onLoaderReset(Loader<VideoLoader.LoaderResponse> loader) {
