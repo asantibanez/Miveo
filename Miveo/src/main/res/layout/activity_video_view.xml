@@ -13,13 +13,13 @@
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="220dp"
+            android:layout_height="250dp"
             android:elevation="2dp">
 
             <ImageView
                 android:id="@+id/thumbnail"
                 android:layout_width="match_parent"
-                android:layout_height="220dp"
+                android:layout_height="250dp"
                 android:scaleType="centerCrop"/>
 
             <LinearLayout
@@ -78,11 +78,12 @@
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/video_view_toolbar"
+        android:layout_marginTop="24dp"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:minHeight="?attr/actionBarSize"
-        android:elevation="3dp"
-        android:background="@drawable/ab_background_protection"
+        android:elevation="5dp"
+        android:background="?android:attr/selectableItemBackground"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
     <com.melnykov.fab.FloatingActionButton
@@ -93,7 +94,7 @@
         android:elevation="5dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginTop="190dp"
+        android:layout_marginTop="220dp"
         android:src="@drawable/ic_action_av_play_arrow"
         fab:fab_colorNormal="@color/accent"
         fab:fab_colorPressed="@color/accent_dark"

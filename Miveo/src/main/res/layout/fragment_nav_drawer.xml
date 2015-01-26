@@ -10,4 +10,4 @@
     android:dividerHeight="0dp"
     android:drawSelectorOnTop="true"
     android:focusable="true"
-    android:background="@color/primary_text" />
+    android:background="@color/background" />

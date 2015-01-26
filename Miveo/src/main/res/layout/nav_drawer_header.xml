@@ -15,18 +15,18 @@
     <LinearLayout
         android:id="@+id/drawer_user_info"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_gravity="bottom"
         android:orientation="vertical"
-        android:layout_alignParentBottom="true"
+        android:paddingTop="32dp"
         android:background="?android:attr/selectableItemBackground">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/userPhoto"
             android:layout_width="64dp"
             android:layout_height="64dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"/>
+            android:layout_margin="16dp"
+            android:layout_gravity="top|start"/>
 
         <LinearLayout
             android:id="@+id/name_area"
@@ -34,8 +34,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:gravity="center_vertical"
-            >
+            android:layout_gravity="bottom|start">
 
             <TextView
                 android:id="@+id/userName"
