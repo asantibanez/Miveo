@@ -21,6 +21,7 @@
     <string name="canal">Canal</string>
     <string name="loading">Cargando...</string>
     <string name="action_search">Buscar</string>
+    <string name="search_hint">Hint</string>
 
     <string name="username">Iniciar Sesión</string>
 

@@ -1,5 +1,7 @@
 package com.vorticelabs.miveo.activities;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -7,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -126,6 +129,15 @@ public class HomeActivity extends ActionBarActivity
     //onCreateOptionsMenu
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.home, menu);
+
+        // Associate searchable configuration with the SearchView
+        SearchManager searchManager =
+                (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView =
+                (SearchView) menu.findItem(R.id.search).getActionView();
+        searchView.setSearchableInfo(
+                searchManager.getSearchableInfo(getComponentName()));
+
         return true;
     }
     //onOptionsItemSelected
@@ -133,10 +145,6 @@ public class HomeActivity extends ActionBarActivity
         if (mDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
-//
-//        if(item.getItemId() == R.id.action_login) {
-//            startActivity(new Intent(this, LoginActivity.class));
-//        }
 
         return super.onOptionsItemSelected(item);
     }
