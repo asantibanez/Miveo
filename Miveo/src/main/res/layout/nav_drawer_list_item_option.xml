@@ -5,9 +5,13 @@
     android:gravity="center_vertical"
     android:listSelector="@color/primary_light"
     android:minHeight="?android:attr/listPreferredItemHeight"
-    android:background="?android:attr/selectableItemBackground"
     android:clickable="true"
     android:focusable="true">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?android:attr/selectableItemBackground" />
 
     <ImageView
         android:id="@+id/option_icon"

@@ -35,6 +35,9 @@ public class NavDrawerAdapter extends RecyclerView.Adapter<NavDrawerAdapter.View
     private String name;
     private String info;
 
+    final int mNormalColor, mCheckedColor, mCheckedBacgroundRes, mNormalBackgroundRes;
+    private Callback mCallback;
+
     Context context;
 
     //Listener for item click events
@@ -49,7 +52,7 @@ public class NavDrawerAdapter extends RecyclerView.Adapter<NavDrawerAdapter.View
     }
 
     //Constructor
-    public NavDrawerAdapter(String Titles[], int Icons[], String Subtitles[], int Cover, int Profile, String Name, String Info, Context passedContext) {
+    public NavDrawerAdapter(String Titles[], int Icons[], String Subtitles[], int Cover, int Profile, String Name, String Info, Context passedContext, Callback callback) {
         mTitles = Titles;
         mIcons = Icons;
         mSubtitles = Subtitles;
@@ -58,6 +61,13 @@ public class NavDrawerAdapter extends RecyclerView.Adapter<NavDrawerAdapter.View
         name = Name;
         info = Info;
         this.context = passedContext;
+        mCallback = callback;
+
+        mNormalColor = context.getResources().getColor(R.color.icons);
+        mCheckedColor = context.getResources().getColor(R.color.accent);
+
+        mNormalBackgroundRes = 0;
+        mCheckedBacgroundRes = R.color.dark_cards;
     }
 
     // Creating a ViewHolder which extends the RecyclerView View Holder
@@ -140,15 +150,7 @@ public class NavDrawerAdapter extends RecyclerView.Adapter<NavDrawerAdapter.View
     // which view type is being created 1 for item row
     @Override
     public void onBindViewHolder(NavDrawerAdapter.ViewHolder holder, int position) {
-        if(holder.holderId == 1) {
-            // as the list view is going to be called after the header view so we decrement the
-            // position by 1 and pass it to the holder while setting the text and image
-            //Title
-            holder.title.setText(mTitles[position - 1]);
-            //Icon
-            holder.icon.setImageResource(mIcons[position - 1]);
-        }
-        else if (holder.holderId == 0){
+        if (holder.holderId == 0){
             //Cover
             holder.cover.setImageResource(R.drawable.default_menu_backdrop);
             //User photo
@@ -157,6 +159,19 @@ public class NavDrawerAdapter extends RecyclerView.Adapter<NavDrawerAdapter.View
             holder.name.setText(R.string.username);
             //User info
             holder.info.setText("en Vimeo");
+        }
+        else if (holder.holderId == 1) {
+            // as the list view is going to be called after the header view so we decrement the
+            // position by 1 and pass it to the holder while setting the text and image
+
+            //Set text and icon
+            holder.title.setText(mTitles[position - 1]);
+            holder.icon.setImageResource(mIcons[position - 1]);
+
+            boolean isSelected = (getCorrectPosition(position)) == mCallback.getSelectedPosition();
+            holder.title.setTextColor(isSelected ? mCheckedColor : mNormalColor);
+            holder.itemView.setBackgroundResource(isSelected ? mCheckedBacgroundRes : mNormalBackgroundRes);
+            holder.icon.setColorFilter(isSelected ? mCheckedColor: mNormalColor);
         }
         else if (holder.holderId == 2){
             //Subtitle
@@ -183,11 +198,18 @@ public class NavDrawerAdapter extends RecyclerView.Adapter<NavDrawerAdapter.View
             return SUBOPTION_VIEW_TYPE;
     }
 
+    public int getCorrectPosition(int position){
+        return position - 1;
+    }
+
     private boolean isPositionHeader(int position) {
         return position == 0;
     }
 
     private boolean isPositionList(int position) {
         return position > 0 && position < (mTitles.length + 1) ;
+    }
+    public interface Callback {
+        int getSelectedPosition();
     }
 }

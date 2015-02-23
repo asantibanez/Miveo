@@ -42,7 +42,7 @@ dependencies {
     compile 'com.viewpagerindicator:library:2.4.1'
 
     //Tab Strip
-    compile 'com.jpardogo.materialtabstrip:library:1.0.7'
+    compile 'com.jpardogo.materialtabstrip:library:1.0.9'
 
     //Circle Image View
     compile 'de.hdodenhof:circleimageview:1.2.1'

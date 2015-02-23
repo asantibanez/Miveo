@@ -4,10 +4,5 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="start"
-    android:choiceMode="singleChoice"
-    android:clickable="true"
-    android:divider="@null"
-    android:dividerHeight="0dp"
-    android:drawSelectorOnTop="true"
     android:focusable="true"
     android:background="@color/background" />
